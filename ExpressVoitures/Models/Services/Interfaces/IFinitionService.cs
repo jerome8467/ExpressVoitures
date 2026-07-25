@@ -1,6 +1,6 @@
 ﻿namespace ExpressVoitures.Models.Services.Interfaces
 {
-    public class IFinitionService
+    public interface IFinitionService
     {
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ExpressVoitures.Models.Services.Interfaces
 {
-    public class IVehicleModelService
+    public interface IVehicleModelService
     {
     }
 }
