@@ -5,8 +5,8 @@ namespace ExpressVoitures.Resources.Models.ViewModels.CarAdminViewModel
 {
     public class CarAdminViewModelResources
     {
-        private static ResourceManager ResourceManager = new ResourceManager(typeof(CarAdminViewModelResources));
-        private static CultureInfo? CultureInfo;
+        private static readonly ResourceManager ResourceManager = new ResourceManager(typeof(CarAdminViewModelResources));
+        private static readonly CultureInfo CultureInfo = new CultureInfo("fr-FR");
 
         public static string NotNumber
         {

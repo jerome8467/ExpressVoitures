@@ -10,7 +10,6 @@ using ExpressVoitures.Models.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
@@ -21,7 +20,14 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<ICarRepository, CarRepository>();
+builder.Services.AddTransient<IFinitionRepository, FinitionRepository>();
+builder.Services.AddTransient<IManufacturerRepository, ManufacturerRepository>();
+builder.Services.AddTransient<IVehicleModelRepository, VehicleModelRepository>();
+
 builder.Services.AddTransient<ICarService, CarService>();
+builder.Services.AddTransient<IFinitionService, FinitionService>();
+builder.Services.AddTransient<IManufacturerService, ManufacturerService>();
+builder.Services.AddTransient<IVehicleModelService, VehicleModelService>();
 
 var app = builder.Build();
 

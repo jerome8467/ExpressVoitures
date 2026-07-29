@@ -5,8 +5,8 @@ namespace ExpressVoitures.Resources.Models.ViewModels.LoginViewModel
 {
     public static class LoginViewModelResources
     {
-        private static ResourceManager ResourceManager = new ResourceManager(typeof(LoginViewModelResources));
-        private static CultureInfo? CultureInfo;
+        private static readonly ResourceManager ResourceManager = new ResourceManager(typeof(LoginViewModelResources));
+        private static readonly CultureInfo CultureInfo = new CultureInfo("fr-FR");
 
         public static string MissingEmail 
         {
