@@ -11,6 +11,7 @@ namespace ExpressVoitures.Models.ViewModels
             ErrorMessageResourceName = "MissingFinition")]
         public required string Name { get; set; }
 
+        public string? VehicleModelName { get; set; }
         public int VehicleModelId { get; set; }
     }
 }

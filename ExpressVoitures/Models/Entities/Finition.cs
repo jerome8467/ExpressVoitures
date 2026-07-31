@@ -6,6 +6,6 @@
         public required string Name { get; set; }
 
         public int VehicleModelId { get; set; }
-        public virtual VehicleModel? Model { get; set; }
+        public virtual VehicleModel? VehicleModel { get; set; }
     }
 }

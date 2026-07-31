@@ -17,5 +17,9 @@
         public int FinitionId { get; set; }
         public virtual Finition? Finition { get; set; }
 
+        public virtual CarRepair CarRepair { get; set; } = null!;
+        public virtual CarTransaction CarTransaction { get; set; } = null!;
+        public virtual ICollection<CarImage>? CarImage { get; set; }
+
     }
 }

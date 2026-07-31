@@ -23,6 +23,9 @@ builder.Services.AddTransient<ICarRepository, CarRepository>();
 builder.Services.AddTransient<IFinitionRepository, FinitionRepository>();
 builder.Services.AddTransient<IManufacturerRepository, ManufacturerRepository>();
 builder.Services.AddTransient<IVehicleModelRepository, VehicleModelRepository>();
+builder.Services.AddTransient<ICarImageRepository, CarImageRepository>();
+builder.Services.AddTransient<ICarRepairRepository, CarRepairRepository>();
+builder.Services.AddTransient<ICarTransactionRepository, CarTransactionRepository>();
 
 builder.Services.AddTransient<ICarService, CarService>();
 builder.Services.AddTransient<IFinitionService, FinitionService>();

@@ -3,7 +3,7 @@ using ExpressVoitures.Attributes;
 using ExpressVoitures.Models.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace ExpressVoitures.Models.ViewModels
+namespace ExpressVoitures.Models.ViewModels.CarViewModel.CarViewModel
 {
     public class CarAdminViewModel
     {
