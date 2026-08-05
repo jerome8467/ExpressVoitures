@@ -13,9 +13,9 @@ namespace ExpressVoitures.Models.Repositories
             _dataBase = dataBase;
         }
 
-        public async Task<IEnumerable<VehicleModel>> GetAllVehicleModel()
+        public async Task<IEnumerable<VehicleModel>> GetAllVehicleModel(int manufacturerId)
         {
-            IEnumerable<VehicleModel> vehicleModelList = await _dataBase.VehicleModel
+            IEnumerable<VehicleModel> vehicleModelList = await _dataBase.VehicleModel.Where(i => i.ManufacturerId == manufacturerId)
                 .Include(m => m.Manufacturer)
                 .ToListAsync();
             return vehicleModelList;

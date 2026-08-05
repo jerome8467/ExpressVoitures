@@ -4,7 +4,7 @@ namespace ExpressVoitures.Models.Repositories.Interfaces
 {
     public interface IVehicleModelRepository
     {
-        public Task<IEnumerable<VehicleModel>> GetAllVehicleModel();
+        public Task<IEnumerable<VehicleModel>> GetAllVehicleModel(int manufacturerId);
         public Task<VehicleModel?> GetByIdVehicleModel(int id);
         public Task AddVehicleModel(VehicleModel vehicleModelNew);
         public Task UpdateVehicleModel(VehicleModel vehicleModelUpdate);

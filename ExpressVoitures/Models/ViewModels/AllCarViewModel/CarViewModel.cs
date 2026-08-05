@@ -1,7 +1,8 @@
-﻿namespace ExpressVoitures.Models.ViewModels.CarViewModel
+﻿namespace ExpressVoitures.Models.ViewModels.AllCarViewModel
 {
     public class CarViewModel
     {
+        public int Id { get; set; }
         public double? SalePrice { get; set; }
         public int Year { get; set; }
         public required string Manufacturer { get; set; }

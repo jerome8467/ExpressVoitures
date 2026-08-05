@@ -8,6 +8,14 @@ html {
   }
 }
 
+:root {
+    --color-primary: #D9A963;
+    --color-secondary: #B99056;
+    --color-tertiary: #F2E3CE;
+    --color-text-primary: #796157;
+    --color-text-secondary: #2C1810;
+}
+
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -17,6 +25,424 @@ html {
   min-height: 100%;
 }
 
+
+/* LAYOUT */
+.ev-full-width {
+    width: 100%;
+
+}
+
+.ev-content {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.ev-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight:500;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+    .ev-nav-btn:hover {
+        background-color: var(--color-primary);
+        color: white;
+    }
+
+    .ev-nav-btn i {
+        font-size: 1.1rem;
+    }
+
+.ev-nav-btn-admin {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+    .ev-nav-btn-admin:hover {
+        background-color: var(--color-text-secondary);
+        color: white;
+    }
+
+    .ev-nav-btn-admin i {
+        font-size: 1.1rem;
+    }
+
+/* HEADER */
+.ev-header {
+    background-color: white;
+    border-bottom: 1px solid var(--color-primary);
+}
+
+.ev-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8vh;
+}
+
+.ev-logo {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+}
+
+/*index*/
+
+.title-index {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+}
+
 body {
-  margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+
+}
+
+.ev-page-index {
+    background-color: var(--color-tertiary);
+    width: 100%;
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    background-color: white;
+    border-top: 1px solid var(--color-primary);
+    position: relative;
+    z-index: 1;
+    height: 7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ev-index-row {
+    display: flex;
+    width: 100%;
+    height: 85vh;
+    align-items: center;
+}
+
+.ev-index-col-side {
+    flex: 1;
+    height: 50%;
+    overflow: hidden;    
+}
+
+    .ev-index-col-side img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+.alignRight-img {
+     object-position: right;
+    }
+
+
+.alignLeft-img {
+    object-position: left;
+}
+
+
+
+
+
+
+@keyframes slideFromCenter {
+    from {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.ev-index-col-center {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 6px;
+    min-height: 40vh;
+    padding: 2rem;
+    z-index: 1;
+    border: 1px solid var(--color-primary);
+    gap: 2rem;
+}
+
+.ev-indexCenter-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    text-align: center;
+
+}
+
+.ev-indexSlogan {
+    font-family: 'Libre Baskerville', serif;
+    font-style:italic;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    text-align: center;
+
+}
+
+
+.ev-indexCenter-content {
+    text-align: justify;
+    font-size: 1.1rem ;
+    line-height: 1.5;
+}
+
+.ev-indexCenter-btn {
+    display: flex;
+    width: auto;
+    gap: 0.4rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.ev-indexCenter-btn:hover{
+    background-color: var(--color-secondary);
+    color: white;
+}
+
+
+/*ANIMATION*/
+
+.slideLeft-img {
+    animation: slideLeftIn 1s ease-out forwards;
+}
+
+.slideRight-img {
+    animation: slideRightIn 1s ease-out forwards;
+}
+
+@keyframes slideLeftIn {
+    from {
+        transform: translateX(50%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideRightIn {
+    from {
+        transform: translateX(-50%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slideTop {
+    animation: slideTopIn 1s ease-out forwards;
+}
+
+.slideBottom {
+    animation: slideBottomIn 1s ease-out forwards;
+}
+
+@keyframes slideTopIn {
+    from {
+        transform: translateY(50%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideBottomIn {
+    from {
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.FadeIn {
+    animation: FadeIn 1s ease-out forwards;
+}
+
+@keyframes FadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.ZoomIn {
+    animation: ZoomIn 1s ease-out forwards;
+}
+
+@keyframes ZoomIn {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+.ev-page-Login {
+    background-image: url("/images/fondco.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ev-Login-col {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    background-color: rgba(255, 255, 255, 0.96);
+    border-radius: 6px;
+    min-height: 30vh;
+    padding: 2rem;
+    z-index: 1;
+    border: 1px solid var(--color-primary);
+    gap: 1rem;
+}
+
+.ev-container-form {
+    display: flex;
+    flex-direction: column;
+    gap:0.25rem;
+    padding-bottom: 0.75rem;
+    font-size:0.9rem;
+}
+
+.ev-loginBtn {
+    margin-top: 1rem;
+    display: flex;
+    width: 100%;
+    gap: 0.4rem;
+    justify-content:center;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.ev-loginBtn:hover {
+    background-color: var(--color-secondary);
+    color: white;
+
+}
+
+.ev-formLogin {
+    gap: 1rem;
+    width: 100%
+}
+
+.ev-form-control {
+    display: block;
+    width: 100%;
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.ev-form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: var(--color-primary);
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem var(--color-primary);
+}
+
+.ev-titleLogin {
+    text-align: center;
+    font-size: 1.2rem;
+
+    font-family: 'Libre Baskerville', serif;
+    color: var(--color-text-primary);
 }

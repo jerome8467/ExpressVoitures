@@ -1,30 +1,32 @@
 ﻿using ExpressVoitures.Resources.Models.ViewModels.CarAdminViewModel;
 using ExpressVoitures.Attributes;
-using ExpressVoitures.Models.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace ExpressVoitures.Models.ViewModels.CarViewModel.CarViewModel
+namespace ExpressVoitures.Models.ViewModels.AllCarViewModel
 {
     public class CarAdminViewModel
     {
         public int CarId { get; set; }
+        public double SalePrice { get; set; }
 
 
-        //SECTION INFORMATION
+        ///////////////////////// SECTION INFORMATION /////////////////////////
+        // Entities : Car
+
         [Required(ErrorMessageResourceType = typeof(CarAdminViewModelResources),
             ErrorMessageResourceName = "MissingManufacturer")]
         public int ManufacturerId { get; set; }
-        public List<Manufacturer>? Manufacturers { get; set; }
+        public string? ManufacturerName { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(CarAdminViewModelResources),
             ErrorMessageResourceName = "MissingVehicleModel")]
         public int VehicleModelId { get; set; }
-        public List<VehicleModel>? VehicleModels { get; set; }
+        public string? VehicleModelName { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(CarAdminViewModelResources),
             ErrorMessageResourceName = "MissingFinition")]
         public int FinitionId { get; set; }
-        public List<Finition>? Finitions { get; set; }
+        public string? FinitionName { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(CarAdminViewModelResources),
             ErrorMessageResourceName = "MissingYear")]
@@ -39,11 +41,13 @@ namespace ExpressVoitures.Models.ViewModels.CarViewModel.CarViewModel
         public string? Description { get; set; }
 
 
-        //SECTION STATUT
+        ///////////////////////// SECTION STATUT /////////////////////////
+        // Entities : Car
         public bool Available { get; set; }
 
 
-        //SECTION REPAIR
+        ///////////////////////// SECTION REPAIR /////////////////////////
+        // Entities : CarRepair
         public int CarRepairId { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(CarAdminViewModelResources),
@@ -56,7 +60,8 @@ namespace ExpressVoitures.Models.ViewModels.CarViewModel.CarViewModel
         public required string TypeOfRepair { get; set; }
 
 
-        //SECTION TRANSACTION
+        ///////////////////////// SECTION TRANSACTION /////////////////////////
+        // Entities : CarTransaction
         public int CarTransactionId { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(CarAdminViewModelResources),
@@ -72,8 +77,8 @@ namespace ExpressVoitures.Models.ViewModels.CarViewModel.CarViewModel
         public DateOnly? SaleDate { get; set; }
 
 
-        //SECTION IMAGE
-        public int CarImageId { get; set; }
-        public List<CarImage>? CarImages { get; set; }
+        ///////////////////////// SECTION IMAGE /////////////////////////
+        // Entities : CarImage
+        public List<CarImageViewModel> ImagesList { get; set; } = new List<CarImageViewModel>();
     }
 }

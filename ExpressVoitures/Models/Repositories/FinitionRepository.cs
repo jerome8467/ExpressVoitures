@@ -13,9 +13,9 @@ namespace ExpressVoitures.Models.Repositories
             _dataBase = dataBase;
         }
 
-        public async Task<IEnumerable<Finition>> GetAllFinition()
+        public async Task<IEnumerable<Finition>> GetAllFinition(int vehicleModelId)
         {
-            IEnumerable<Finition> finitionList = await _dataBase.Finition
+            IEnumerable<Finition> finitionList = await _dataBase.Finition.Where(v => v.VehicleModelId == vehicleModelId)
                 .Include(v => v.VehicleModel)
                 .ToListAsync();
             return finitionList;

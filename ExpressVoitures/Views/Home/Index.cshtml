@@ -2,7 +2,42 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="ev-page-index">
+    <div class="ev-index-row">
+        <div class="ev-index-col-side alignLeft-img slideLeft-img">
+            <img src="~/images/gauche.png" class="alignRight-img" alt="image gauche" />
+        </div>
+        <div class="ev-index-col-center">
+            <div>
+                <div class=" ev-indexCenter-title slideBottom">
+                <a>
+                    Express Voiture
+                </a>
+                </div>
+                <div class="ev-indexSlogan slideTop">
+                <a>
+                    Réparer, revaloriser, transmettre
+                </a>
+                </div>
+            </div>
+            
+            <div class="ev-indexCenter-content FadeIn">
+                <a>Nous rachetons, réparons et revalorisons des véhicules avec soin pour leur donner une seconde vie.
+                    Chaque voiture est préparée avec exigence afin de reprendre la route en toute confiance
+                    et d’écrire un nouveau chapitre de son histoire auprès de vous.</a>
+            </div>
+            <div >
+                <div class="ZoomIn">
+                    <a class="ev-indexCenter-btn" asp-controller="Home" asp-action="CarList" title="Voir nos voitures">
+                    <i class="bi-car-front"></i>
+                    VOIR NOS VOITURES
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="ev-index-col-side alignRight-img slideRight-img">
+            <img src="~/images/droite.png" class="alignLeft-img" alt="image droite" />
+        </div>
+    </div>
 </div>
+

@@ -46,22 +46,22 @@ namespace ExpressVoitures.Models.Services
             return vehicleModel;
         }
 
-        public async Task<List<VehicleModel>> GetAllVehicleModel()
+        public async Task<List<VehicleModel>> GetAllVehicleModel(int manufacturerId)
         {
-            IEnumerable<VehicleModel> vehicleModelList = await _vehicleModelRepository.GetAllVehicleModel();
+            IEnumerable<VehicleModel> vehicleModelList = await _vehicleModelRepository.GetAllVehicleModel(manufacturerId);
             return vehicleModelList.ToList();
         }
 
-        public async Task<List<VehicleModelViewModel>> GetAllVehicleModelViewModel()
+        public async Task<List<VehicleModelViewModel>> GetAllVehicleModelViewModel(int manufacturerId)
         {
-            IEnumerable<VehicleModel> vehicleModelViewModel = await GetAllVehicleModel();
+            IEnumerable<VehicleModel> vehicleModelViewModel = await _vehicleModelRepository.GetAllVehicleModel(manufacturerId);
             return MapToViewModel(vehicleModelViewModel);
         }
 
-        public async Task<VehicleModelViewModel?> GetByIdVehicleModelViewModel(int id)
+        public async Task<VehicleModelViewModel?> GetByIdVehicleModelViewModel(VehicleModelViewModel vehicleModelView)
         {
-            List<VehicleModelViewModel> vehicleModelViewModelList = await GetAllVehicleModelViewModel();
-            VehicleModelViewModel? vehicleModelViewModel = vehicleModelViewModelList.FirstOrDefault(v => v.Id == id);
+            List<VehicleModelViewModel> vehicleModelViewModelList = await GetAllVehicleModelViewModel(vehicleModelView.ManufacturerId);
+            VehicleModelViewModel? vehicleModelViewModel = vehicleModelViewModelList.FirstOrDefault(v => v.Id == vehicleModelView.Id);
             return vehicleModelViewModel;
         }
 

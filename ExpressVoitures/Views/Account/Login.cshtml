@@ -1,0 +1,32 @@
+﻿@model ExpressVoitures.Models.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Account Page";
+}
+
+
+<div class="ev-page-Login">
+    <div class="ev-Login-col">
+        <div class="ev-titleLogin"
+        <a>ESPACE ADMINISTRATEUR</a>
+        </div>
+        <form asp-action="Login" asp-controller="Account" method="post">
+            <div class="text-danger mt-4 ev-formLogin" asp-validation-summary="ModelOnly"></div>
+            <input type="hidden" asp-for="ReturnUrl" />
+
+            <div class="ev-container-form">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" class="ev-form-control" type="email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="ev-container-form">
+                <label asp-for="Password">Mot de passe</label>
+                <input asp-for="Password" class="ev-form-control" type="password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button class="ev-loginBtn" type="submit"><i class="bi-box-arrow-in-right"></i>Se connecter</button>
+        </form>
+    </div>
+</div>

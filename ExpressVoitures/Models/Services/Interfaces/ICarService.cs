@@ -1,5 +1,4 @@
-﻿using ExpressVoitures.Models.Entities;
-using ExpressVoitures.Models.ViewModels.CarViewModel;
+﻿using ExpressVoitures.Models.ViewModels.AllCarViewModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace ExpressVoitures.Models.Services.Interfaces
@@ -12,8 +11,12 @@ namespace ExpressVoitures.Models.Services.Interfaces
         Task <CarViewModel?> GetCarViewModelById(int id);
         Task<CarAdminViewModel?> GetByIdCarAdminViewModel(int id);
         Task<List<ValidationResult>> AddCar(CarAdminViewModel carAdminViewModel);
-        Task<List<ValidationResult>> UpdateCar(CarAdminViewModel carUpdate);
-        Task DeleteCar(int id);
+        Task<List<ValidationResult>> UpdateCar(CarAdminViewModel carAdminCurrent, CarAdminViewModel carAdminUpdate);
+        Task DeleteCar(CarAdminViewModel carAdminViewModel);
+        Task AddCarImage(CarImageViewModel carImageViewModel, CarAdminViewModel carAdminViewModel);
+        Task DeleteCarImage(CarImageViewModel carImageViewModel, CarAdminViewModel carAdminViewModel);
+        Task SetCarImageAsCover(CarImageViewModel carImageViewModel, CarAdminViewModel carAdminViewModel);
+        
         
     }
 }
