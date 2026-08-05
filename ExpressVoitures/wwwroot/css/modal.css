@@ -1,0 +1,73 @@
+﻿:root {
+    --color-primaire: rgba(217, 169, 99, 1);
+    --color-secondaire: rgba(185, 144, 86, 1);
+    --color-tertiaire: rgba(242, 227, 206, 1);
+    --color-text-primaire: rgba(121, 97, 87, 1);
+    --color-text-secondaire: rgba(44, 24, 16, 1);
+}
+
+.ev-modalOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    justify-items:center;
+
+    align-items: center;
+}
+
+.ev-modalContent {
+    background: white;
+    padding: 3rem;
+    height: auto;
+    width: auto;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    border-radius: 12px;
+    border:1px solid var(--color-text-primaire);
+    font-size: 1.2rem;
+    font-family: 'Libre Baskerville', serif;
+    color:var(--color-text-primaire)
+}
+
+.ev-separateurModal {
+    height: 1px;
+    width: 100%;
+    margin: 2rem;
+    background-color: var(--color-primaire);
+}
+
+
+.ev-ManufacturerModalBtn {
+    display: flex;
+    height: 3rem;
+    font-family: sans-serif;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-primaire);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    border: 1px solid var(--color-secondaire);
+    outline: none;
+    box-shadow: none;
+}
+
+    .ev-ManufacturerModalBtn:hover {
+        background-color: var(--color-secondaire);
+        color: white;
+    }
+
+    .ev-ManufacturerModalBtn i {
+        font-size: 1.1rem;
+    }

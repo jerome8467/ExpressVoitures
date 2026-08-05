@@ -1,7 +1,7 @@
 ﻿using ExpressVoitures.Resources.Models.ViewModels.CarAdminViewModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace ExpressVoitures.Models.ViewModels
+namespace ExpressVoitures.Models.ViewModels.AllManufacturerViewModel
 {
     public class ManufacturerViewModel
     {

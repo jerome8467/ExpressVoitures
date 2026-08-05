@@ -40,6 +40,37 @@ namespace ExpressVoitures.Data
                 .WithMany()
                 .HasForeignKey(c => c.FinitionId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<VehicleModel>()
+                .HasOne(v => v.Manufacturer)
+                .WithMany(m => m.VehicleModel)
+                .HasForeignKey(v => v.ManufacturerId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Finition>()
+                .HasOne(f => f.VehicleModel)
+                .WithMany(v => v.Finition)
+                .HasForeignKey(f => f.VehicleModelId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CarRepair>()
+                .HasOne(r => r.Car)
+                .WithOne(c => c.CarRepair)
+                .HasForeignKey<CarRepair>(r => r.CarId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CarTransaction>()
+                .HasOne(t => t.Car)
+                .WithOne(c => c.CarTransaction)
+                .HasForeignKey<CarTransaction>(t => t.CarId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CarImage>()
+                .HasOne(i => i.Car)
+                .WithMany(c => c.CarImage)
+                .HasForeignKey(i => i.CarId)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
 
     }

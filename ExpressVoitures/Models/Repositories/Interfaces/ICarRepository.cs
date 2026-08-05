@@ -7,7 +7,7 @@ namespace ExpressVoitures.Models.Repositories.Interfaces
         public Task<IEnumerable<Car>> GetAllCar();
         public Task<Car?> GetByIdCar(int id);
         public Task AddCar(Car carNew);
-        public Task UpdateCar(Car carUpdate);
+        public Task UpdateCar(Car car, CarRepair carRepair, CarTransaction carTransaction);
         public Task DeleteCar(int id);
 
     }

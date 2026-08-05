@@ -6,39 +6,119 @@ namespace ExpressVoitures.Models.Services
     public class CarMapper
     {
 
+        ///////////////////////// CAR /////////////////////////
+
         /// <summary>
-        /// Converts a collection of Car entities to CarViewModel for public display.
+        /// Converts a single Car entities to CarViewModel for public display.
         /// </summary>
-        /// <returns>List of CarViewModel for the public view.</returns>
-        public static List<CarViewModel> MapToCarViewModel(IEnumerable<Car> carsFromDatabase)
+        /// <returns>A single CarViewModel for the public view.</returns>
+        public static CarViewModel MapToCarViewModel(Car carsFromDatabase, bool loadImageList)
         {
-            List<CarViewModel> carViewModel = new List<CarViewModel>();
-            foreach (var car in carsFromDatabase)
+                double salePrice = carsFromDatabase.CarRepair.RepairPrice + carsFromDatabase.CarTransaction.PurchasePrice + carsFromDatabase.CarTransaction.AdditionalAmount;
+
+                IEnumerable<CarImageViewModel> carImageList = MapToCarImageViewModel(carsFromDatabase.CarImage ?? Enumerable.Empty<CarImage>());
+
+            CarViewModel newCarViewModel = new CarViewModel
             {
-                double salePrice = car.CarRepair.RepairPrice + car.CarTransaction.PurchasePrice + 500;
+                Id = carsFromDatabase.Id,
+                SalePrice = salePrice,
+                Year = carsFromDatabase.Year,
+                Kilometer = carsFromDatabase.Kilometer,
+                Manufacturer = carsFromDatabase.Manufacturer?.Name ?? string.Empty,
+                VehicleModel = carsFromDatabase.VehicleModel?.Name ?? string.Empty,
+                Finition = carsFromDatabase.Finition?.Name ?? string.Empty,
+                Description = carsFromDatabase.Description,
+                Status = carsFromDatabase.Status,
+                ImageCover = carImageList.FirstOrDefault(i => i.IsCover == true)?.ImagePath,
+                ImageList = loadImageList ? carImageList.Where(i => i.IsCover == false).ToList() : null
+            };
 
-                IEnumerable<CarImageViewModel> carImageList = MapToCarImageViewModel(car.CarImage ?? Enumerable.Empty<CarImage>());
+            return newCarViewModel;
+        }
 
-                carViewModel.Add(new CarViewModel
-                {
-                    SalePrice = salePrice,
-                    Year = car.Year,
-                    Manufacturer = car.Manufacturer?.Name ?? string.Empty,
-                    VehicleModel = car.VehicleModel?.Name ?? string.Empty,
-                    Finition = car.Finition?.Name ?? string.Empty,
-                    Description = car?.Description,
-                    ImageCover = carImageList.FirstOrDefault(i => i.IsCover == true)?.ImagePath,
-                    ImageList = carImageList.Where(i => i.IsCover == false).ToList()
-                });
-            }
 
-            return carViewModel;
+        /// <summary>
+        /// Converts a single Car entities to CarAdminViewModel for administrateur.
+        /// </summary>
+        /// <returns>A single CarAdminViewModel for administrateur view.</returns>
+        public static CarAdminViewModel MapToCarAdminViewModel(Car carsFromDatabase, bool loadImageList)
+        {
+            double salePrice = carsFromDatabase.CarRepair.RepairPrice + carsFromDatabase.CarTransaction.PurchasePrice + carsFromDatabase.CarTransaction.AdditionalAmount;
+
+            IEnumerable<CarImageViewModel> carImageList = loadImageList
+                ? MapToCarImageViewModel(carsFromDatabase.CarImage ?? Enumerable.Empty<CarImage>())
+                : Enumerable.Empty<CarImageViewModel>();
+
+            CarAdminViewModel newCarAdminViewModel = new CarAdminViewModel
+            {
+                //SECTION INFORMATION
+                CarId = carsFromDatabase.Id,
+                SalePrice = salePrice,
+                ManufacturerId = carsFromDatabase.ManufacturerId,
+                ManufacturerName = carsFromDatabase.Manufacturer?.Name ?? string.Empty,
+                VehicleModelId = carsFromDatabase.VehicleModelId,
+                VehicleModelName = carsFromDatabase.VehicleModel?.Name ?? string.Empty,
+                FinitionId = carsFromDatabase.FinitionId,
+                FinitionName = carsFromDatabase.Finition?.Name ?? string.Empty,
+                Year = carsFromDatabase.Year.ToString(),
+                Kilometer = carsFromDatabase.Kilometer.ToString(),
+                Description = carsFromDatabase.Description,
+
+                //SECTION STATUT
+                Status = carsFromDatabase.Status,
+
+                //SECTION REPAIR
+                CarRepairId = carsFromDatabase.CarRepair.Id,
+                RepairPrice = carsFromDatabase.CarRepair.RepairPrice.ToString(),
+                TypeOfRepair = carsFromDatabase.CarRepair.TypeOfRepair,
+
+                //SECTION TRANSACTION
+                CarTransactionId = carsFromDatabase.CarTransaction.Id,
+                PurchaseDate = carsFromDatabase.CarTransaction.PurchaseDate,
+                PurchasePrice = carsFromDatabase.CarTransaction.PurchasePrice.ToString(),
+                AvailabilityDate = carsFromDatabase.CarTransaction.AvailabilityDate,
+                SaleDate = carsFromDatabase.CarTransaction.SaleDate,
+                AdditionalAmount = carsFromDatabase.CarTransaction.AdditionalAmount,
+
+                //SECTION IMAGE
+                ImagesList = carImageList.ToList()
+
+            };
+
+            return newCarAdminViewModel;
+
         }
 
         /// <summary>
-        /// Converts a collection of CarImage entities to CarImageViewModel.
+        /// Converts a single CarAdminViewModel to Car entities.
         /// </summary>
-        /// <returns>List of CarImageViewModel.</returns>
+        /// <returns>A single Car.</returns>
+        public static Car MapToCarFromDatabase(CarAdminViewModel carAdminViewModel, bool newRecord)
+        {
+            Car newCar = new Car
+            {
+                Year = int.Parse(carAdminViewModel.Year),
+                Kilometer = int.Parse(carAdminViewModel.Kilometer),
+                Description = carAdminViewModel.Description,
+                Status = carAdminViewModel.Status,
+                ManufacturerId = carAdminViewModel.ManufacturerId!.Value,
+                VehicleModelId = carAdminViewModel.VehicleModelId!.Value,
+                FinitionId = carAdminViewModel.FinitionId!.Value
+            };
+            if (!newRecord)
+                newCar.Id = carAdminViewModel.CarId;
+
+            return newCar;
+        }
+
+
+
+        ///////////////////////// CAR IMAGE /////////////////////////
+
+            /// <summary>
+            /// Converts a collection of CarImage entities to CarImageViewModel.
+            /// </summary>
+            /// <returns>A List of CarImageViewModel.</returns>
         public static List<CarImageViewModel> MapToCarImageViewModel(IEnumerable<CarImage> carImagesFromDatabase)
         {
             List<CarImageViewModel> carImageViewModelList = new List<CarImageViewModel>();
@@ -56,16 +136,137 @@ namespace ExpressVoitures.Models.Services
             return carImageViewModelList;
         }
 
-        public static CarImage MapToCarImageFromDatabase(CarImageViewModel carImageViewModel)
+        /// <summary>
+        /// Converts a single CarImageViewModel to CarImage entities.
+        /// </summary>
+        /// <returns>A single CarImage.</returns>
+        public static CarImage MapToCarImageFromDatabase(CarImageViewModel carImageViewModel, bool newRecord)
         {
-            CarImage carImageNew = new CarImage
+            CarImage newCarImage = new CarImage
             {
                 CarId = carImageViewModel.CarId,
                 ImagePath = carImageViewModel.ImagePath,
                 IsCover = carImageViewModel.IsCover
             };
-            return carImageNew;
+            if (!newRecord)
+                newCarImage.Id = carImageViewModel.ImageId;
+            return newCarImage;
+        }
+
+
+
+        ///////////////////////// CAR REPAIR /////////////////////////
+
+        /// <summary>
+        /// Converts a single CarRepair entities to CarRepairViewModel.
+        /// </summary>
+        /// <returns>A single CarRepairViewModel.</returns>
+        public static CarRepairViewModel MapToCarRepairViewModel(CarRepair carRepairsFromDatabase)
+        {
+            CarRepairViewModel newCarRepairViewModel = new CarRepairViewModel
+            {
+                Id = carRepairsFromDatabase.Id,
+                CarId = carRepairsFromDatabase.CarId,
+                RepairPrice = carRepairsFromDatabase.RepairPrice,
+                TypeOfRepair = carRepairsFromDatabase.TypeOfRepair,
+            };
+            return newCarRepairViewModel;
+        }
+
+        /// <summary>
+        /// Converts a single CarRepairViewModel to CarRepair entities.
+        /// </summary>
+        /// <returns>A single CarRepair.</returns>
+        public static CarRepair MapToCarRepairFromDatabase(CarRepairViewModel carRepairViewModel, bool newRecord)
+        {
+            CarRepair newCarRepair = new CarRepair
+            {
+                CarId = carRepairViewModel.CarId,
+                RepairPrice = carRepairViewModel.RepairPrice,
+                TypeOfRepair = carRepairViewModel.TypeOfRepair
+            };
+            if (!newRecord)
+                newCarRepair.Id = carRepairViewModel.Id;
+            return newCarRepair;
+        }
+
+        /// <summary>
+        /// Converts a single CarAdminViewModel to CarRepair entities.
+        /// </summary>
+        /// <returns>A single CarRepair.</returns>
+        public static CarRepair MapCarAdminViewModelToCarRepairFromDatabase(CarAdminViewModel carAdminViewModel, bool newRecord)
+        {
+            CarRepair newCarRepair = new CarRepair
+            {
+                CarId = carAdminViewModel.CarId,
+                RepairPrice = double.Parse(carAdminViewModel.RepairPrice),
+                TypeOfRepair = carAdminViewModel.TypeOfRepair,
+            };
+            if (!newRecord)
+                newCarRepair.Id = carAdminViewModel.CarRepairId;
+            return newCarRepair;
+        }
+
+
+
+        ///////////////////////// CAR TRANSACTION /////////////////////////
+
+        /// <summary>
+        /// Converts a single CarTransaction entities to CarTransactionViewModel.
+        /// </summary>
+        /// <returns>A single CarTransactionViewModel.</returns>
+        public static CarTransactionViewModel MapToCarTransactionViewModel(CarTransaction carTransactionsFromDatabase)
+        {
+                CarTransactionViewModel newCarTransactionViewModel = new CarTransactionViewModel
+                {
+                    Id = carTransactionsFromDatabase.Id,
+                    CarId = carTransactionsFromDatabase.CarId,
+                    PurchaseDate = carTransactionsFromDatabase.PurchaseDate,
+                    PurchasePrice = carTransactionsFromDatabase.PurchasePrice,
+                    AvailabilityDate = carTransactionsFromDatabase.AvailabilityDate,
+                    SaleDate = carTransactionsFromDatabase.SaleDate,
+                };
+            return newCarTransactionViewModel;
+        }
+
+        /// <summary>
+        /// Converts a single CarTransactionViewModel to CarTransaction entities.
+        /// </summary>
+        /// <returns>A single CarTransaction.</returns>
+        public static CarTransaction MapToCarTransactionFromDatabase(CarTransactionViewModel carTransactionViewModel, bool newRecord)
+        {
+            CarTransaction newCarTransaction = new CarTransaction
+            {
+                CarId = carTransactionViewModel.CarId,
+                PurchaseDate = carTransactionViewModel.PurchaseDate,
+                PurchasePrice = carTransactionViewModel.PurchasePrice,
+                AvailabilityDate = carTransactionViewModel.AvailabilityDate,
+                SaleDate = carTransactionViewModel.SaleDate,
+            };
+            if (!newRecord)
+                newCarTransaction.Id = carTransactionViewModel.Id;
+            return newCarTransaction;
+        }
+
+        /// <summary>
+        /// Converts a single CarAdminViewModel to CarTransaction entities.
+        /// </summary>
+        /// <returns>A single CarTransaction.</returns>
+        public static CarTransaction MapCarAdminViewModelToCarTransactionFromDatabase(CarAdminViewModel carAdminViewModel, bool newRecord)
+        {
+            CarTransaction newCarTransaction = new CarTransaction
+            {
+                CarId = carAdminViewModel.CarId,
+                PurchaseDate = carAdminViewModel.PurchaseDate!.Value,
+                PurchasePrice = double.Parse(carAdminViewModel.PurchasePrice),
+                AvailabilityDate = carAdminViewModel.AvailabilityDate,
+                SaleDate = carAdminViewModel.SaleDate,
+            };
+            if (!newRecord)
+                newCarTransaction.Id = carAdminViewModel.CarTransactionId;
+            return newCarTransaction;
         }
 
     }
 }
+

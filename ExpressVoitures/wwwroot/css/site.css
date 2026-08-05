@@ -8,6 +8,20 @@ html {
   }
 }
 
+.validation-summary-errors ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --color-primary: #D9A963;
+    --color-secondary: #B99056;
+    --color-tertiary: #F2E3CE;
+    --color-text-primary: #796157;
+    --color-text-secondary: #2C1810;
+}
+
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -17,6 +31,1025 @@ html {
   min-height: 100%;
 }
 
+
+/* LAYOUT */
+.ev-full-width {
+    width: 100%;
+
+}
+
+.ev-content {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.ev-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight:500;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+    .ev-nav-btn:hover {
+        background-color: var(--color-primary);
+        color: white;
+    }
+
+    .ev-nav-btn i {
+        font-size: 1.1rem;
+    }
+
+.ev-nav-btn-admin {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+    .ev-nav-btn-admin:hover {
+        background-color: var(--color-secondary);
+        color: white;
+    }
+
+    .ev-nav-btn-admin i {
+        font-size: 1.1rem;
+    }
+
+button.ev-nav-btn-admin {
+    border: none;
+    cursor: pointer;
+}
+
+
+/* HEADER */
+.ev-header {
+    background-color: white;
+    border-bottom: 1px solid var(--color-primary);
+}
+
+.ev-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8vh;
+}
+
+.ev-logo {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+}
+
+/*index*/
+
+.title-index {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+}
+
 body {
-  margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+
+}
+
+.ev-page-index {
+    background-color: var(--color-tertiary);
+    width: 100%;
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    background-color: white;
+    border-top: 1px solid var(--color-primary);
+    position: relative;
+    z-index: 1;
+    height: 7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ev-index-row {
+    display: flex;
+    width: 100%;
+    height: 85vh;
+    align-items: center;
+}
+
+.ev-index-col-side {
+    flex: 1;
+    height: 50%;
+    overflow: hidden;    
+}
+
+    .ev-index-col-side img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+.alignRight-img {
+     object-position: right;
+    }
+
+
+.alignLeft-img {
+    object-position: left;
+}
+
+
+
+
+
+
+@keyframes slideFromCenter {
+    from {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.ev-index-col-center {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 6px;
+    min-height: 40vh;
+    padding: 2rem;
+    z-index: 1;
+    border: 1px solid var(--color-primary);
+    gap: 2rem;
+}
+
+.ev-indexCenter-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    text-align: center;
+
+}
+
+.ev-indexSlogan {
+    font-family: 'Libre Baskerville', serif;
+    font-style:italic;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    text-align: center;
+
+}
+
+
+.ev-indexCenter-content {
+    text-align: justify;
+    font-size: 1.1rem ;
+    line-height: 1.5;
+}
+
+.ev-indexCenter-btn {
+    display: flex;
+    width: auto;
+    gap: 0.4rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.ev-indexCenter-btn:hover{
+    background-color: var(--color-secondary);
+    color: white;
+}
+
+
+/*ANIMATION*/
+
+.slideLeft-img {
+    animation: slideLeftIn 1s ease-out forwards;
+}
+
+.slideRight-img {
+    animation: slideRightIn 1s ease-out forwards;
+}
+
+@keyframes slideLeftIn {
+    from {
+        transform: translateX(50%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideRightIn {
+    from {
+        transform: translateX(-50%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slideTop {
+    animation: slideTopIn 1s ease-out forwards;
+}
+
+.slideBottom {
+    animation: slideBottomIn 1s ease-out forwards;
+}
+
+@keyframes slideTopIn {
+    from {
+        transform: translateY(50%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideBottomIn {
+    from {
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.FadeIn {
+    animation: FadeIn 0.5s ease-out forwards;
+}
+
+@keyframes FadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.ZoomIn {
+    animation: ZoomIn 1s ease-out forwards;
+}
+
+@keyframes ZoomIn {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+.ev-page-Login {
+    background-image: url("/images/fondco.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ev-Login-col {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    background-color: rgba(255, 255, 255, 0.96);
+    border-radius: 6px;
+    min-height: 30vh;
+    padding: 2rem;
+    z-index: 1;
+    border: 1px solid var(--color-primary);
+    gap: 1rem;
+}
+
+.ev-container-form {
+    display: flex;
+    flex-direction: column;
+    gap:0.25rem;
+    padding-bottom: 0.75rem;
+    font-size:0.9rem;
+}
+
+.ev-loginBtn {
+    margin-top: 1rem;
+    display: flex;
+    width: 100%;
+    gap: 0.4rem;
+    justify-content:center;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.ev-loginBtn:hover {
+    background-color: var(--color-secondary);
+    color: white;
+
+}
+
+.ev-formLogin {
+    gap: 1rem;
+    width: 100%
+}
+
+.ev-form-control {
+    display: block;
+    width: 100%;
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.ev-form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: var(--color-primary);
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem var(--color-primary);
+}
+
+.ev-titleLogin {
+    text-align: center;
+    font-size: 1.2rem;
+
+    font-family: 'Libre Baskerville', serif;
+    color: var(--color-text-primary);
+}
+
+.ev-titleList {
+    height: 16vh;
+    display: flex;
+    flex-direction: column;
+    justify-content:end;
+    align-items: center;
+    font-family: 'Libre Baskerville', serif;
+    color: var(--color-text-primary);
+    font-style: italic;
+    gap: 2rem;
+
+}
+
+.ev-divider {
+    width: 40%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #c9a86a, transparent);
+}
+
+.ev-tabList {
+    width:100%;
+    padding:0 2rem;
+    justify-self:center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+    gap: 1.5rem;
+    padding-top: 3rem;
+    padding-bottom: 10rem;
+}
+
+.ev-containerTab {
+    border-radius: 8px;
+    overflow: hidden;
+    outline: 1px solid rgba(30, 30, 30, 0.3);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+    .ev-containerTab:hover {
+        outline: 2px solid var(--color-primary);
+    }
+
+    .ev-cardImg {
+        height: 25vh;
+        background-size: cover;
+        background-position: center;
+        align-content: flex-end;
+        padding: 8px;
+    }
+
+.ev-cardInfo {
+    background-color: rgba(30, 30, 30, 0.75);
+    border: 1px groove rgba(30, 30, 30, 0.6);
+    justify-content:space-between;
+    color: white;
+    display: flex;
+    border-radius: 8px;
+    flex-direction: row;
+    padding: 8px;
+    line-height: 1.5rem;
+}
+    .ev-cardInfo p {
+        font-size:0.85rem;
+        margin: 0;
+        padding: 0;
+    }
+
+.ev-carPrice {
+    background-color: rgba(217, 169, 99, 0.5);
+    border: 1px solid var(--color-primary);
+    padding: 4px 16px;
+    border-radius: 8px;
+}
+
+    .ev-carPrice p {
+        font-family: 'Libre Baskerville', serif;
+        font-size: 0.9rem;
+        margin: 0;
+        padding: 0;
+    }
+
+
+
+
+
+/*//////////////////////////// CARSINGLE ////////////////////////////*/
+
+
+
+
+
+.ev-singleCar {
+    width: 100%;
+    justify-self: center;
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-height: 80vh;
+    padding-top: 5rem;
+    padding-bottom: 10rem;
+    background-color: #F7F7F7;
+}
+
+.ev-insideSingleCar {
+
+    display:flex;
+    justify-content:space-between;
+    justify-self:center;
+    text-align:left;
+    border-radius: 12px;
+    padding:0;
+    gap:0.25rem;
+    
+}
+.ev-singleInformationCar {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    border-radius: 12px;
+    display: flex;
+    border: 1px solid #d9d9d9;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    background-color: white;
+    padding: 1rem;
+}
+
+    .ev-singleInformationCar a {
+        font-family: 'Libre Baskerville', serif;
+        font-size:1.8rem;
+        margin:0;
+        padding:0;
+    }
+
+    .ev-singleInformationCar p {
+        font-family: 'Libre Baskerville', serif;
+        font-weight:500;
+        margin: 0;
+        padding: 0.7rem;
+        font-size: 0.9rem;
+        line-height: 0.8;
+        background-color: var(--color-text-primary);
+        color: white;
+        border-radius: 8px;
+    }
+
+    .ev-singleInformationCar h1 {
+        font-family: 'Libre Baskerville', serif;
+        color: var(--color-text-secondary);
+        font-weight:500;
+        font-size: 1.25rem;
+        margin: 0;
+        padding: 0;
+        padding-top:1rem;
+        padding-bottom:0.5rem;
+        line-height: 0.8;
+    }
+
+.ev-singleInfoCar {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #d9d9d9;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    background-color: white;
+}
+
+
+
+    .ev-singleInfoCar p {
+        align-items:center;
+        text-align: left;
+        margin: 0;
+        gap:0.5rem;
+        padding: 0rem 1rem;
+        width: 100%;
+        display: flex;
+        flex-direction:column;
+    }
+
+    .ev-singleInfoCar h1 {
+        align-content: center;
+        text-align: center;
+        font-size: 2rem;
+        color: white;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: 'Libre Baskerville', serif;
+    }
+
+    .ev-singleDescription {
+        border: 1px solid #d9d9d9;
+        width: 100%;
+        border-radius: 12px;
+        padding: 1rem;
+        background-color: white;
+        gap: 1rem;
+    }
+
+        .ev-singleDescription a {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .ev-singleDescription p {
+        }
+
+.ev-singleImage {
+    object-fit: cover;
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+#carCarousel,
+#carCarousel .carousel-inner,
+#carCarousel .carousel-item {
+    height: 100%;
+    width: 100%; 
+}
+
+    #carCarousel .carousel-item.active,
+    #carCarousel .carousel-item-next,
+    #carCarousel .carousel-item-prev {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+.ev-insideSingleBottom {
+    display: flex;
+    justify-content: space-between;
+    justify-self: center;
+    text-align: left;
+    border-radius: 12px;
+    padding: 0;
+    gap: 0.25rem;
+    width: 60%;
+    background-color: rgba(60, 60, 60, 1);
+}
+
+.ev-singleAdmin {
+    width: 50%;
+    border-radius: 12px;
+    padding: 1rem;
+    display:flex;
+    flex-direction:column;
+    background-color: rgba(60, 60, 60, 1);
+    color:white;
+}
+
+    .ev-singleAdmin a {
+        font-size: 1.1rem;
+        font-weight: 500;
+        padding:0;
+        margin:0;
+
+    }
+
+    .ev-singleAdmin p {
+        font-size: 0.8rem;
+        padding: 0;
+        margin: 0;
+    }
+
+    .ev-singleAdmin span {
+        font-size: 0.8rem;
+        padding: 0;
+        margin: 0;
+    }
+
+.ev-singleAdminbtn {
+    width: 25%;
+    height: 4vh;
+    border-radius: 12px;
+    padding: 0.25rem;
+    background-color: var(--color-primary);
+    color: white;
+    display: inline-flex; 
+    justify-content: center;
+    align-items: center
+}
+    .ev-singleAdminbtn span {
+        line-height:0.8;
+        padding: 0;
+        margin: 0;
+        font-size:0.9rem;
+        font-weight:600;
+    }
+
+    .ev-singleAdminbtn:hover {
+        background-color: var(--color-secondary);
+        cursor: pointer;
+    }
+
+
+
+    /*//////////////////////////// DASHBOARDINDEX ////////////////////////////*/
+    .ev-bodyDashboard {
+        width: 100%;
+        gap: 0.25rem;
+        min-height: 85vh;
+        padding: 2rem;
+        background-color: #F7F7F7;
+        display: flex;
+    }
+
+.ev-bodyDashboardContent {
+    box-sizing:border-box;
+    flex:1;
+    width:100%;
+}
+
+.ev-bodyDashboardStat {
+
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #D1D5DB;
+    padding-bottom: 1rem;
+    gap: 1rem;
+    box-sizing: border-box;
+}
+
+.ev-bodyDashboardinside {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid #D1D5DB;
+    background-color: white;
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    height: 17vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+    .ev-bodyDashboardinside img {
+        opacity: 0.9;
+        position: absolute;
+        width: 65%;
+        height: auto;
+        object-fit: cover;
+        object-position: bottom right;
+        bottom: 0;
+        right: 0;
+        z-index: 0;
+    }
+
+    .ev-bodyDashboardinside i {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        border-radius: 8px;
+        color: white;
+        background-color: var(--color-text-primary);
+        margin: 0;
+        z-index: 1;
+    }
+
+    .ev-bodyDashboardinside a {
+        font-family: 'Lato', serif;
+        color: var(--color-text-primary);
+        font-size: 1.05rem;
+        font-weight: 500;
+        margin: 0;
+        z-index: 1;
+    }
+
+    .ev-bodyDashboardinside p {
+        font-family: 'Libre Baskerville', serif;
+        color: var(--color-text-secondary);
+        font-size: 1.5rem;
+        margin: 0;
+        line-height: 0.8;
+        display: inline-block;
+        z-index: 1;
+    }
+
+.ev-bodyDashboardinsideTitle {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.ev-bodyDashboardinsideResult{
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.evbodyDashboardTabCarManu{
+    width : 100%;
+    margin-top:1rem;
+    height: calc(65vh - 4rem);
+    gap:1rem;
+    display:flex;
+
+}
+
+.evbodyDashboardTabCar {
+    width: calc((100% - 10rem) / 6 * 3.5 + 6rem);
+    border: 1px solid #D1D5DB;
+    background-color: white;
+    border-radius: 12px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.evbodyDashboardTabManu {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid #D1D5DB;
+    background-color: white;
+    border-radius: 12px;
+    height: 100%;
+    display:flex;
+    flex-direction:column;
+}
+
+.evbodyDashboardTabTitle {
+    height: auto;
+    font-family: 'Libre Baskerville', serif;
+    color: var(--color-text-secondary);
+    display: flex;
+    font-size: 1.5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+    .evbodyDashboardTabTitle p {
+        padding: 1rem 1rem;
+        margin: 0;
+    }
+
+    .evbodyDashboardTabTitle span {
+        padding: 0.25rem 1rem;
+        margin:0;
+        font-size: 0.8rem;
+        border:1px solid green;
+        width:100%
+        
+    }
+
+    .ev-nav-btn-dashboard {
+        display: flex;
+        font-family:'Arial Rounded MT';
+        align-items: center;
+        margin-right:1rem;
+        gap: 0.4rem;
+        padding: 0.5rem 1rem;
+        background-color: var(--color-primary);
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: background-color 0.2s;
+    }
+
+        .ev-nav-btn-dashboard:hover {
+            background-color: var(--color-secondary);
+            color: white;
+        }
+
+        .ev-nav-btn-dashboard i {
+            font-size: 1.1rem;
+        }
+
+
+    .ev-contenairTab {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .ev-contenairTab table {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ev-contenairTab thead {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .ev-contenairTab tbody {
+            display: block;
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            /* 2. Pour Firefox */
+            scrollbar-width: none;
+            /* 3. Pour Internet Explorer / Edge historique */
+            -ms-overflow-style: none;
+        }
+
+        .ev-contenairTab tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+.ev-table {
+    border: 1px solid green;
+    overflow-y: auto;
+    min-height: 0;
+    border-collapse: collapse;
+}
+
+.rOne {
+    height: 3rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    border-bottom: 1px solid #D1D5DB;
+}
+
+.rTwo {
+    height: 3rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    border-bottom: 1px solid #D1D5DB;
+    border-left: 1px solid #D1D5DB;
+    border-right: 1px solid #D1D5DB;
+}
+
+.tOne {
+    height: 2rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    border-top: 1px solid #D1D5DB;
+    border-bottom: 1px solid #D1D5DB;
+    font-family: 'Lato', serif;
+    font-weight: 500;
+    background-color: rgba(121, 97, 87, 0.7);
+    color: white;
+}
+
+.tTwo {
+    height: 2rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    border-top: 1px solid #D1D5DB;
+    border-left: 1px solid #D1D5DB;
+    border-right: 1px solid #D1D5DB;
+    border-bottom: 1px solid #D1D5DB;
+    font-family: 'Lato', serif;
+    font-weight: 500;
+    background-color: rgba(44, 24, 16, 0.7);
+    color: white;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: rgba(242, 227, 206, 0.1);
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(217, 169, 99, 0.1);
+}
+
+tbody tr:hover {
+    background-color: var(--color-primary);
+    transition: background-color 0.3s ease;
+    color: white;
+    cursor: pointer;
+}
+
+th, td {
+    white-space: nowrap;
 }

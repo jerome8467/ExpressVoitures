@@ -1,0 +1,85 @@
+﻿@using ExpressVoitures.Resources.Views.CarList
+@model ExpressVoitures.Models.ViewModels.AllCarViewModel.CarViewModel
+
+@{
+    ViewData["Title"] = "Car Single";
+}
+
+<div class="ev-singleCar">
+    <div class="ev-insideSingleCar" style="display:flex; width:60%;">
+        <div class="ev-insideSingleCar" style="width: 75%; height:50vh;">
+            <div id="carCarousel" class="carousel slide" style="height:50vh;" data-bs-ride="carousel">
+                <div class="carousel-inner" style="border-radius:12px; height:100%; border:1px solid #d9d9d9;">
+                @if (Model.ImageCover != null)
+                {
+                    <div class="carousel-item active" >
+                            <img src="@Model.ImageCover" class="ev-singleImage" alt="Image principale" />
+                    </div>
+                }
+                @if (Model.ImageList != null)
+                {
+                    @foreach (var image in Model.ImageList)
+                    {
+                        <div class="carousel-item">
+                                <img src="@image.ImagePath" class="ev-singleImage" alt="Image" />
+                        </div>
+                    }
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+        </div>
+        <div class="ev-insideSingleCar" style="display:flex; flex-direction:column;align-items:stretch; width:25%; ">
+            
+            <div class="ev-singleInformationCar">
+                    
+                    <a> @Model.Manufacturer</a>
+                    <a>@Model.VehicleModel</a>
+                    <h1>@CarListViewResources.Finition</h1>
+                    <p> @Model.Finition</p>
+                <h1>@CarListViewResources.Year</h1>
+                    <p> @Model.Year</p>
+                <h1>@CarListViewResources.Year</h1>
+                    <p> @Model.Kilometer KM</p>
+                </div>
+            
+            
+            
+            <div class="ev-singleInfoCar" style="height:40%; background-color: #796157;">
+                <h1>@Model.SalePrice €</h1>
+            </div>
+        </div>
+    </div>
+    <div class="ev-insideSingleCar" style="min-height:20vh; width:60%">
+        <div class="ev-singleDescription">
+            <a style="font-family: 'Libre Baskerville', serif; font-size:1.25rem">@CarListViewResources.Description</a>
+            <p>@Model.Description</p>
+        </div>
+    </div>
+    @if (User.Identity?.IsAuthenticated == true)
+                {
+    <div class="ev-insideSingleBottom">
+        <div class="ev-singleAdmin">
+                <div style="gap:0.25rem"><i class="bi bi-gear"></i>
+                    <a>@CarListViewResources.AdminMode</a>
+            </div>
+                <p>@CarListViewResources.AdminTxt</p>
+        </div>
+            <div class="ev-singleAdmin" style="flex-direction:row; align-items:center; gap:1rem;justify-content:flex-end;">
+                <div class="ev-singleAdminbtn">
+                    <a asp-controller="CarAdmin" asp-action="EditCarAdminIndex" asp-route-id="@Model.Id">
+                    <span>@CarListViewResources.Change</span>
+                    </a>
+                </div>
+                <div class="ev-singleAdminbtn">
+                    <span>@CarListViewResources.Delete</span>
+                </div>
+            </div>
+    </div>
+                }
+</div>

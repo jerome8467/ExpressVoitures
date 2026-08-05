@@ -7,5 +7,7 @@
 
         public int ManufacturerId { get; set; }
         public virtual Manufacturer? Manufacturer { get; set; }
+
+        public virtual ICollection<Finition> Finition { get; set; } = new List<Finition>();
     }
 }

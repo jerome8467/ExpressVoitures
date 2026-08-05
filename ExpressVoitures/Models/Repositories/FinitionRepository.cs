@@ -13,11 +13,16 @@ namespace ExpressVoitures.Models.Repositories
             _dataBase = dataBase;
         }
 
-        public async Task<IEnumerable<Finition>> GetAllFinition()
+        public async Task<IEnumerable<Finition>> GetAllFinitionByVehicleModel(int vehicleModelId)
         {
-            IEnumerable<Finition> finitionList = await _dataBase.Finition
+            IEnumerable<Finition> finitionList = await _dataBase.Finition.Where(v => v.VehicleModelId == vehicleModelId)
                 .Include(v => v.VehicleModel)
                 .ToListAsync();
+            return finitionList;
+        }
+        public async Task<IEnumerable<Finition>> GetAllFinition()
+        {
+            IEnumerable<Finition> finitionList = await _dataBase.Finition.ToListAsync();
             return finitionList;
         }
 
@@ -38,21 +43,17 @@ namespace ExpressVoitures.Models.Repositories
         public async Task UpdateFinition(Finition finitionUpdate)
         {
             Finition? finitionCurrent = await _dataBase.Finition.FirstOrDefaultAsync(f => f.Id == finitionUpdate.Id);
-            if (finitionCurrent != null)
-            {
-                _dataBase.Finition.Update(finitionUpdate);
+            if (finitionCurrent == null) return;
+                finitionCurrent.Name = finitionUpdate.Name;
                 await _dataBase.SaveChangesAsync();
-            }
         }
 
         public async Task DeleteFinition(int id)
         {
             Finition? finition = await _dataBase.Finition.FirstOrDefaultAsync(f => f.Id == id);
-            if (finition != null)
-            {
+            if (finition == null) return;
                 _dataBase.Finition.Remove(finition);
                 await _dataBase.SaveChangesAsync();
-            }
         }
     }
 }

@@ -19,6 +19,15 @@ namespace ExpressVoitures.Models.Repositories
             IEnumerable<Manufacturer> manufacturerList = await _dataBase.Manufacturer.ToListAsync();
             return manufacturerList;
         }
+        public async Task<IEnumerable<Manufacturer>> GetAllManufacturerWithInclude()
+        {
+            IEnumerable<Manufacturer> manufacturerList =
+                await _dataBase.Manufacturer
+                .Include(m => m.VehicleModel)
+                    .ThenInclude(v => v.Finition)
+                .ToListAsync();
+            return manufacturerList;
+        }
 
         public async Task<Manufacturer?> GetByIdManufacturer(int id)
         {
@@ -32,34 +41,20 @@ namespace ExpressVoitures.Models.Repositories
             await _dataBase.SaveChangesAsync();
         }
 
-        /*public void UpdateManufacturer(Manufacturer manufacturerUpdate)
-        {
-            Manufacturer? manufacturerCurrent = _dataBase.Manufacturer.FirstOrDefault(m => m.Id == manufacturerUpdate.Id);
-            if (manufacturerCurrent != null)
-            {
-                _dataBase.Entry(manufacturerCurrent).CurrentValues.SetValues(manufacturerUpdate);
-                _dataBase.SaveChanges();
-            }
-        }*/
-
         public async Task UpdateManufacturer(Manufacturer manufacturerUpdate)
         {
             Manufacturer? manufacturerCurrent = await _dataBase.Manufacturer.FirstOrDefaultAsync(m => m.Id == manufacturerUpdate.Id);
-            if (manufacturerCurrent != null)
-            {
-                _dataBase.Manufacturer.Update(manufacturerUpdate);
+            if (manufacturerCurrent == null) return;
+                manufacturerCurrent.Name = manufacturerUpdate.Name;
                 await _dataBase.SaveChangesAsync();
-            }
         }
 
         public async Task DeleteManufacturer(int id)
         {
             Manufacturer? manufacturer = await _dataBase.Manufacturer.FirstOrDefaultAsync(m => m.Id == id);
-            if(manufacturer != null)
-            {
+            if(manufacturer == null) return;
                 _dataBase.Manufacturer.Remove(manufacturer);
                 await _dataBase.SaveChangesAsync();
-            }
         }
     }
 }

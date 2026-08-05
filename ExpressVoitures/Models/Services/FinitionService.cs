@@ -45,22 +45,27 @@ namespace ExpressVoitures.Models.Services
             return finitionNew;
         }
 
+        public async Task<List<Finition>> GetAllFinitionByVehicleModel(int vehicleModelId)
+        {
+            IEnumerable<Finition> finitionList = await _finitionRepository.GetAllFinitionByVehicleModel(vehicleModelId);
+            return finitionList.ToList();
+        }
         public async Task<List<Finition>> GetAllFinition()
         {
             IEnumerable<Finition> finitionList = await _finitionRepository.GetAllFinition();
             return finitionList.ToList();
         }
 
-        public async Task<List<FinitionViewModel>> GetAllFinitionViewModel()
+        public async Task<List<FinitionViewModel>> GetAllFinitionViewModelByVehicleModel(int vehicleModelId)
         {
-            IEnumerable<Finition> finitionViewModel = await _finitionRepository.GetAllFinition();
+            IEnumerable<Finition> finitionViewModel = await _finitionRepository.GetAllFinitionByVehicleModel(vehicleModelId);
             return MapToViewModel(finitionViewModel);
         }
 
-        public async Task<FinitionViewModel?> GetByIdFinitionViewModel(int id)
+        public async Task<FinitionViewModel?> GetByIdFinitionViewModel(FinitionViewModel finitionView)
         {
-            List<FinitionViewModel> finitionViewModelList = await GetAllFinitionViewModel();
-            FinitionViewModel? finitionViewModel = finitionViewModelList.FirstOrDefault(F => F.Id == id);
+            List<FinitionViewModel> finitionViewModelList = await GetAllFinitionViewModelByVehicleModel(finitionView.VehicleModelId);
+            FinitionViewModel? finitionViewModel = finitionViewModelList.FirstOrDefault(F => F.Id == finitionView.Id);
             return finitionViewModel;
         }
 
@@ -74,6 +79,7 @@ namespace ExpressVoitures.Models.Services
 
             var finitionToAdd = MapToDatabase(finitionNew);
             await _finitionRepository.AddFinition(finitionToAdd);
+            finitionNew.Id = finitionToAdd.Id;
 
             return new List<ValidationResult>();
         }

@@ -1,4 +1,4 @@
-﻿namespace ExpressVoitures.Models.ViewModels.CarViewModel.CarViewModel
+﻿namespace ExpressVoitures.Models.ViewModels.AllCarViewModel
 {
     public class CarImageViewModel
     {

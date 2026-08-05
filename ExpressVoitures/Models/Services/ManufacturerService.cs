@@ -1,7 +1,7 @@
 ﻿using ExpressVoitures.Models.Entities;
 using ExpressVoitures.Models.Repositories.Interfaces;
 using ExpressVoitures.Models.Services.Interfaces;
-using ExpressVoitures.Models.ViewModels;
+using ExpressVoitures.Models.ViewModels.AllManufacturerViewModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace ExpressVoitures.Models.Services
@@ -29,21 +29,6 @@ namespace ExpressVoitures.Models.Services
 
             return manufacturerViewModels;
         }
-
-        /*private List<ManufacturerViewModel> MapToViewModel(List<Manufacturer> manufacturersDb)
-        {
-            List<ManufacturerViewModel> manufacturerViewModels = new List<ManufacturerViewModel>();
-            for(int i = 0; i< manufacturersDb.Count; i++) 
-            {
-                manufacturerViewModels.Add(new ManufacturerViewModel
-                {
-                    Id = manufacturersDb[i].Id,
-                    Name = manufacturersDb[i].Name
-                });
-            }
-
-            return manufacturerViewModels;
-        }*/
 
         private Manufacturer MapToDatabase(ManufacturerViewModel manufacturerViewModel)
         {
@@ -86,6 +71,7 @@ namespace ExpressVoitures.Models.Services
 
             var manufacturerToAdd = MapToDatabase(manufacturerNew);
             await _manufacturerRepository.AddManufacturer(manufacturerToAdd);
+            manufacturerNew.Id = manufacturerToAdd.Id;
 
             return new List<ValidationResult>();
 
@@ -109,5 +95,34 @@ namespace ExpressVoitures.Models.Services
         {
             await _manufacturerRepository.DeleteManufacturer(id);
         }
+
+        public async Task<List<ManufacturerDashboardViewModel>> GetAllManufacturerForDashboard()
+        {
+
+            IEnumerable<Manufacturer> manufacturerList = await _manufacturerRepository.GetAllManufacturerWithInclude();
+            List<ManufacturerDashboardViewModel> manufacturerDashboardList = new List<ManufacturerDashboardViewModel>();
+
+
+            foreach (var manufacturer in manufacturerList) 
+            {
+                int countVehicleModels = manufacturer.VehicleModel.Count;
+                int countFinition = manufacturer.VehicleModel.Sum(f => f.Finition.Count);
+
+                ManufacturerDashboardViewModel manufacturerDashboardViewModel = new ManufacturerDashboardViewModel
+                {
+                    Id = manufacturer.Id,
+                    Name = manufacturer.Name,
+                    CountVehicleModel = countVehicleModels,
+                    CountFinition = countFinition
+                };
+
+                manufacturerDashboardList.Add(manufacturerDashboardViewModel);
+
+            }
+
+            return manufacturerDashboardList;
+
+        }
+
     }
 }

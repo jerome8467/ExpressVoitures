@@ -15,7 +15,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
@@ -31,6 +31,8 @@ builder.Services.AddTransient<ICarService, CarService>();
 builder.Services.AddTransient<IFinitionService, FinitionService>();
 builder.Services.AddTransient<IManufacturerService, ManufacturerService>();
 builder.Services.AddTransient<IVehicleModelService, VehicleModelService>();
+
+builder.Services.AddTransient<IDashboardService, DashboardService>();
 
 var app = builder.Build();
 
@@ -57,5 +59,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
-
+await IdentitySeedData.EnsurePopulated(app);
+await ManufacturerSeedData.Initialize(app.Services);
+await CarSeedData.Initialize(app.Services);
 app.Run();

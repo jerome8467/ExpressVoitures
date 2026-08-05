@@ -1,0 +1,37 @@
+﻿@using ExpressVoitures.Resources.Views.CarList
+@model IEnumerable<ExpressVoitures.Models.ViewModels.AllCarViewModel.CarViewModel>
+
+@{
+    ViewData["Title"] = "Car List";
+}
+
+<div class=" = ev-titleList">
+    <div><h1>@CarListViewResources.Title</h1></div>
+    <div class="ev-divider"></div>
+</div>
+<div class="ev-tabList">
+    @foreach (var car in Model)
+    {
+        <a asp-controller="CarListView" asp-action="CarSingle" asp-route-id="@car.Id" style="text-decoration: none;">
+            <div class="ev-containerTab FadeIn">
+            <div class="ev-cardImg" style="background-image: url('@car.ImageCover');">
+                <div class="ev-cardInfo">
+                    <div>
+                    <p style="line-height:1.8rem; font-size:1.3rem; font-weight:600;">@car.Manufacturer @car.VehicleModel</p>
+                    <p>@car.Year | @car.Kilometer km</p>
+                            <p>@CarListViewResources.Finition: @car.Finition</p>
+                    </div>
+                    <div style=" display: flex; align-items:flex-end; justify-content:flex-end; min-width:40%;">
+                        <div class="ev-carPrice">
+                                <p>@CarListViewResources.Price : @car.SalePrice €</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        </a>
+    }
+</div>

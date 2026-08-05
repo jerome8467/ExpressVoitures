@@ -32,6 +32,14 @@ namespace ExpressVoitures.Resources.Models.ViewModels.LoginViewModel
             }
         }
 
+        public static string InvalidCredentials
+        {
+            get
+            {
+                return ResourceManager.GetString("InvalidCredentials", CultureInfo) ?? string.Empty;
+            }
+        }
+
 
     }
 }

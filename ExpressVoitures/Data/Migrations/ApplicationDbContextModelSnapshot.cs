@@ -17,7 +17,7 @@ namespace ExpressVoitures.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.28")
+                .HasAnnotation("ProductVersion", "8.0.29")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -30,9 +30,6 @@ namespace ExpressVoitures.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Available")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -43,6 +40,9 @@ namespace ExpressVoitures.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ManufacturerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<int>("VehicleModelId")
@@ -106,7 +106,8 @@ namespace ExpressVoitures.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId");
+                    b.HasIndex("CarId")
+                        .IsUnique();
 
                     b.ToTable("CarRepair");
                 });
@@ -119,7 +120,10 @@ namespace ExpressVoitures.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateOnly>("AvailabilityDate")
+                    b.Property<double>("AdditionalAmount")
+                        .HasColumnType("float");
+
+                    b.Property<DateOnly?>("AvailabilityDate")
                         .HasColumnType("date");
 
                     b.Property<int>("CarId")
@@ -136,7 +140,8 @@ namespace ExpressVoitures.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId");
+                    b.HasIndex("CarId")
+                        .IsUnique();
 
                     b.ToTable("CarTransaction");
                 });
@@ -434,7 +439,7 @@ namespace ExpressVoitures.Data.Migrations
             modelBuilder.Entity("ExpressVoitures.Models.Entities.CarImage", b =>
                 {
                     b.HasOne("ExpressVoitures.Models.Entities.Car", "Car")
-                        .WithMany()
+                        .WithMany("CarImage")
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -445,8 +450,8 @@ namespace ExpressVoitures.Data.Migrations
             modelBuilder.Entity("ExpressVoitures.Models.Entities.CarRepair", b =>
                 {
                     b.HasOne("ExpressVoitures.Models.Entities.Car", "Car")
-                        .WithMany()
-                        .HasForeignKey("CarId")
+                        .WithOne("CarRepair")
+                        .HasForeignKey("ExpressVoitures.Models.Entities.CarRepair", "CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -456,8 +461,8 @@ namespace ExpressVoitures.Data.Migrations
             modelBuilder.Entity("ExpressVoitures.Models.Entities.CarTransaction", b =>
                 {
                     b.HasOne("ExpressVoitures.Models.Entities.Car", "Car")
-                        .WithMany()
-                        .HasForeignKey("CarId")
+                        .WithOne("CarTransaction")
+                        .HasForeignKey("ExpressVoitures.Models.Entities.CarTransaction", "CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -466,19 +471,19 @@ namespace ExpressVoitures.Data.Migrations
 
             modelBuilder.Entity("ExpressVoitures.Models.Entities.Finition", b =>
                 {
-                    b.HasOne("ExpressVoitures.Models.Entities.VehicleModel", "Model")
-                        .WithMany()
+                    b.HasOne("ExpressVoitures.Models.Entities.VehicleModel", "VehicleModel")
+                        .WithMany("Finition")
                         .HasForeignKey("VehicleModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Model");
+                    b.Navigation("VehicleModel");
                 });
 
             modelBuilder.Entity("ExpressVoitures.Models.Entities.VehicleModel", b =>
                 {
                     b.HasOne("ExpressVoitures.Models.Entities.Manufacturer", "Manufacturer")
-                        .WithMany()
+                        .WithMany("VehicleModel")
                         .HasForeignKey("ManufacturerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -535,6 +540,27 @@ namespace ExpressVoitures.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ExpressVoitures.Models.Entities.Car", b =>
+                {
+                    b.Navigation("CarImage");
+
+                    b.Navigation("CarRepair")
+                        .IsRequired();
+
+                    b.Navigation("CarTransaction")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ExpressVoitures.Models.Entities.Manufacturer", b =>
+                {
+                    b.Navigation("VehicleModel");
+                });
+
+            modelBuilder.Entity("ExpressVoitures.Models.Entities.VehicleModel", b =>
+                {
+                    b.Navigation("Finition");
                 });
 #pragma warning restore 612, 618
         }

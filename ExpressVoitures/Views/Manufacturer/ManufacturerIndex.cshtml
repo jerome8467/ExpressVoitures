@@ -1,0 +1,170 @@
+﻿@using ExpressVoitures.Models.ViewModels
+@using ExpressVoitures.Resources.Views.Manufacturer
+@using ExpressVoitures.Models.ViewModels.AllManufacturerViewModel
+@model ExpressVoitures.Models.ViewModels.AllManufacturerViewModel.ManufacturerEditViewModel
+
+
+@{
+    ViewData["Title"] = "Manufacturer";
+}
+
+<div class="ev-bodyManufacturerIndex">
+    <!-- Debut Colonne Constructeur -->
+    <div class="ev-bodyManufacturerColonne">
+        <p>@ManufacturerIndexResources.Manufacturer</p>
+        <div class="ev-bodyManufacturerEtageOne">
+            <label class="ev-contentInputManulabel" for="manufacturerName">@ManufacturerIndexResources.NameManufacturer</label>
+                <div class="ev-contentInputManu">
+                    <input class="ev-InputManufacturer" type="text" id="manufacturerName" name="Name" />
+                <button class="ev-bodyManufacturerBtn" type="button" onclick="addManufacturer()"><i class="bi bi-plus-circle"></i>@ManufacturerIndexResources.Add</button>
+                </div>
+            <p id="manufacturerError" style="color:red; display:none; font-size:0.7rem; margin-top:0.2rem;margin-bottom:0; padding:0;"></p>
+        </div>
+            
+        <div class="ev-bodyManufacturerList" id="manufacturerList">
+            @foreach (var manufacturer in Model.Manufacturers ?? new List<ManufacturerViewModel>() )
+                            {
+            <div class="ev-cartManufacturer">
+                    <div class="ev-CardLeft" data-id="@manufacturer.Id" onclick="selectManufacturer(@manufacturer.Id, this)">
+                    <p>@manufacturer.Name</p>
+                </div>
+                <div style="display:flex;">
+                        <div class="ev-CardRight" onclick="openEditModal(@manufacturer.Id, '@manufacturer.Name', updateManufacturer, 'Modifier le nom du constructeur')">
+                        <i class="bi-pencil"></i>
+                    </div>
+                        <div class="ev-CardRight" onclick="openDeleteModal(@manufacturer.Id, deleteManufacturer, 'Voulez-vous vraiment supprimer ce constructeur ?')">
+                        <i class="bi-trash"></i>
+                    </div>
+                </div>
+            </div>
+                            }
+        </div>
+    </div>
+    <!-- Fin Colonne Constructeur -->
+    <div class="ev-separateurManufacteur disabled" id="separateurVehicleModelColonne">
+        <div class="ev-separateurTraitManufacteur"></div>
+        <i class="bi-chevron-double-right"></i>
+    </div>
+    <!-- Debut Colonne VehicleModel -->
+    <div class="ev-bodyManufacturerColonne disabled" id="vehicleModelColonne">
+        <p>@ManufacturerIndexResources.VehicleModel</p>
+        <div class="ev-bodyManufacturerEtageOne">
+            <label class="ev-contentInputManulabel" for="vehiclemodelName">@ManufacturerIndexResources.NameVehicleModel</label>
+            <div class="ev-contentInputManu">
+                <input class="ev-InputManufacturer" type="text" id="vehiclemodelName" name="Name" />
+                <button class="ev-bodyManufacturerBtn" type="button" onclick="addVehicleModel()"><i class="bi bi-plus-circle"></i>@ManufacturerIndexResources.Add</button>
+            </div>
+            <p id="vehicleModelError" style="color:red; display:none; font-size:0.7rem; margin-top:0.2rem;margin-bottom:0; padding:0;"></p>
+        </div>
+        <div class="ev-bodyManufacturerList" id="vehicleModelList">
+            @foreach (var vehicleModel in Model.VehicleModels ?? new List<VehicleModelViewModel>())
+            {
+                <div class="ev-cartManufacturer">
+                    <div class="ev-CardLeft" data-id="@vehicleModel.Id" onclick="selectVehicleModel(@vehicleModel.Id, this)">
+                        <p>@vehicleModel.Name</p>
+                    </div>
+                    <div style="display:flex;">
+                        <div class="ev-CardRight" onclick="openEditModal(@vehicleModel.Id, '@vehicleModel.Name', updateVehicleModel, 'Modifier le nom du modèle')">
+                            <i class="bi-pencil"></i>
+                        </div>
+                        <div class="ev-CardRight" onclick="openDeleteModal(@vehicleModel.Id, deleteVehicleModel, 'Voulez-vous vraiment supprimer ce modèle ?')">
+                            <i class="bi-trash"></i>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- Fin Colonne VehicleModel -->
+    <div class="ev-separateurManufacteur disabled" id="separateurFinitionColonne">
+        <div class="ev-separateurTraitManufacteur"></div>
+        <i class="bi-chevron-double-right"></i>
+    </div>
+    <!-- Debut Colonne Finition -->
+    <div class="ev-bodyManufacturerColonne disabled" id="finitionColonne">
+        <p>@ManufacturerIndexResources.Finition</p>
+        <div class="ev-bodyManufacturerEtageOne">
+            <label class="ev-contentInputManulabel" for="finitionName">@ManufacturerIndexResources.NameFinition</label>
+            <div class="ev-contentInputManu">
+                <input class="ev-InputManufacturer" type="text" id="finitionName" name="Name" />
+                <button class="ev-bodyManufacturerBtn" type="button" onclick="addFinition()"><i class="bi bi-plus-circle"></i>@ManufacturerIndexResources.Add</button>
+            </div>
+            <p id="finitionError" style="color:red; display:none; font-size:0.7rem; margin-top:0.2rem;margin-bottom:0; padding:0;"></p>
+        </div>
+        <div class="ev-bodyManufacturerList" id="finitionList">
+            @foreach (var finition in Model.Finitions ?? new List<FinitionViewModel>())
+            {
+                <div class="ev-cartManufacturer" data-finitionid="@finition.Id">
+                    @if (ViewBag.FromAddCar == true)
+                    {
+                        <div class="ev-CardLeft" onclick="selectFinition(@finition.Id, '@finition.Name')">
+                            <p>@finition.Name</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="ev-CardLeft">
+                            <p>@finition.Name</p>
+                        </div>
+                    }
+                    <div style="display:flex;">
+                        <div class="ev-CardRight" onclick="openEditModal(@finition.Id, '@finition.Name', updateFinition, 'Modifier le nom de la finition')">
+                            <i class="bi-pencil"></i>
+                        </div>
+                        <div class="ev-CardRight" onclick="openDeleteModal(@finition.Id, deleteFinition, 'Voulez-vous vraiment supprimer cette finition ?')">
+                            <i class="bi-trash"></i>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- Fin Colonne Finition -->
+</div>
+
+<!-- Modal Suppression-->
+<div id="deleteModal" class="ev-modalOverlay" onclick="closeDeleteModal()">
+    <div class="ev-modalContent" onclick="event.stopPropagation()">
+        <div>
+            <p id="deleteModalMessage"></p>
+            </div>
+        <div class="ev-separateurModal"></div>
+        <div>
+            <button class="ev-ManufacturerModalBtn" onclick="confirmDelete()"><i class="bi-trash"></i>@ManufacturerIndexResources.Delete</button>
+            </div>
+    </div>
+</div>
+
+<!-- Modal Modification-->
+<div id="editModal" class="ev-modalOverlay" onclick="closeEditModal()">
+    <div class="ev-modalContent" onclick="event.stopPropagation()">
+        <div>
+            <p id="editModalTitle"></p>
+        </div>
+        <div class="ev-separateurModal"></div>
+        <div style="width:100%;">
+            <input class="ev-InputManufacturerModal" type="text" id="editModalInput" />
+            <p id="editModalError" style="color:red; display:none; font-size:0.7rem; margin-top:0.2rem;margin-bottom:0; padding:0; text-align:center;"></p>
+        </div>
+        <div>
+            <button class="ev-ManufacturerModalBtn" style="margin-top: 2rem;" onclick="confirmEdit()"><i class="bi-pencil"></i>@ManufacturerIndexResources.Edit</button>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        const fromAddCar = @(ViewBag.FromAddCar == true ? "true" : "false");
+    </script>
+    <script src="~/js/manufacturer.js"></script>
+    @if (Model.SelectedManufacturerId != null)
+    {
+        <script>
+            window.addEventListener('load', () => {
+                const element = document.querySelector('[data-id="@Model.SelectedManufacturerId"]');
+                if (element) selectManufacturer(@Model.SelectedManufacturerId, element);
+            });
+        </script>
+    }
+}

@@ -1,0 +1,271 @@
+﻿:root {
+    --color-primaire: rgba(217, 169, 99, 1);
+    --color-secondaire: rgba(185, 144, 86, 1);
+    --color-tertiaire: rgba(242, 227, 206, 1);
+    --color-text-primaire: rgba(121, 97, 87, 1);
+    --color-text-secondaire: rgba(44, 24, 16, 1);
+}
+
+.ev-bodyManufacturerIndex {
+    width: 100%;
+    min-height: 85vh;
+    padding: 6rem 15rem;
+    background-color: #F7F7F7;
+    display: flex;
+}
+
+
+    .ev-bodyManufacturerColonne {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border: 1px solid #D1D5DB;
+        background-color: white;
+        border-radius: 12px;
+        padding: 1rem;
+        gap: 1rem;
+    }
+    .ev-bodyManufacturerColonne p {
+        font-family: 'Libre Baskerville', serif;
+        font-size:1.3rem;
+        color: var(--color-text-primaire);
+    }
+
+.ev-bodyManufacturerEtageOne {
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    border-radius: 12px;
+    gap: 2rem;
+    font-size: 0.9rem;
+}
+
+.ev-contentInputManu {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content:space-between;
+    gap:2rem;
+}
+
+    .ev-contentInputManulabel{
+    font-size:0.8rem;
+    }
+
+.ev-InputManufacturer {
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    height: 2rem;
+    width:100%
+}
+
+    .ev-InputManufacturer:focus {
+        border: 2px solid var(--color-primaire);
+        outline: none;
+    }
+
+
+.ev-bodyManufacturerBtn {
+    display: flex;
+    height: 2rem;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-primaire);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    border: 1px solid var(--color-secondaire);
+    outline: none;
+    box-shadow: none;
+}
+
+    .ev-bodyManufacturerBtn:hover {
+        background-color: var(--color-secondaire);
+        color: white;
+    }
+
+    .ev-bodyManufacturerBtn i {
+        font-size: 1.1rem;
+    }
+
+.ev-bodyManufacturerList {
+
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    /* 2. Pour Firefox */
+    scrollbar-width: none;
+    /* 3. Pour Internet Explorer / Edge historique */
+    -ms-overflow-style: none;
+}
+
+.ev-cartManufacturer {
+    border: 1px solid var(--color-secondaire);
+    overflow: hidden;
+    margin-top: 0.25rem;
+    height: 3rem;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+    .ev-cartManufacturer i {
+        object-position: center;
+        padding: 1rem;
+        border-left: 1px solid var(--color-secondaire);
+        border-top: 1px solid var(--color-secondaire);
+        border-bottom: 1px solid var(--color-secondaire);
+        margin: 0;
+        gap: 0;
+        color: var(--color-text-primaire);
+        background-color: var(--color-tertiaire)
+    }
+
+    .ev-cartManufacturer:hover{
+        border: 4px double var(--color-secondaire);
+    }
+
+.ev-cartManufacturer:has(.ev-CardLeft.selected) {
+    border: 4px double var(--color-secondaire);
+}
+
+    .ev-separateurManufacteur {
+        display: flex;
+        width: 25%;
+        justify-content: center;
+        align-items: center;
+    }
+.ev-separateurManufacteur i {
+    width:40px;
+    height:40px;
+    padding:0.5rem;
+    border-radius:1000px;
+    background-color:var(--color-primaire);
+    color:white;
+    text-align:center;
+    position:absolute
+}
+
+
+    .ev-separateurTraitManufacteur {
+        height: 1px;
+        width: 100%;
+        background-color: var(--color-primaire);
+    }
+
+.ev-CardLeft {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2rem;
+    color: var(--color-text-primaire);
+}
+
+    .ev-CardLeft p {
+        font-family: 'Libre Baskerville', serif;
+        font-size: 1rem;
+        line-height: 0.8;
+        padding-left: 1rem;
+        font-weight:500;
+        margin: 0;
+    }
+
+        .ev-CardLeft:hover {
+            background-color: var(--color-primaire);
+            color: white;
+            cursor: pointer;
+        }
+
+        .ev-CardLeft:hover p{
+            color: white;
+        }
+
+.ev-CardRight:hover i {
+    color: white;
+    background-color: var(--color-primaire);
+    cursor: pointer;
+}
+
+.ev-CardLeft.selected {
+    background-color: var(--color-primaire);
+    color: white;
+}
+
+    .ev-CardLeft.selected p {
+        color: white;
+    }
+
+.ev-CardLeft:has(:hover) {
+    background-color: var(--color-primaire);
+}
+
+.ev-bodyManufacturerColonne.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    filter: grayscale(100%);
+}
+.ev-separateurManufacteur.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    filter: grayscale(100%);
+}
+
+
+
+.ev-InputManufacturerModal {
+    border: 1px solid #D1D5DB;
+    text-align: center;
+    border-radius: 6px;
+    height: 3rem;
+
+    width: 100%;
+    box-sizing: border-box;
+    color: var(--color-text-secondaire);
+}
+
+    .ev-InputManufacturerModal:focus {
+        border: 2px solid var(--color-primaire);
+        outline: none;
+    }
+
+.ev-manufacturerFromAddCar-header {
+    background-color: var(--color-primary);
+    padding: 1rem 2rem;
+    display: flex;
+    height:8vh;
+    align-items: center;
+}
+
+    .ev-manufacturerFromAddCar-header > a {
+        color: var(--color-primaire)!important;
+        background-color:white;
+        text-decoration: none;
+        font-family: 'Lato', sans-serif;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        border:1px solid white;
+        padding:0.5rem 1rem;
+        border-radius:12px;
+    }
+
+.ev-manufacturerFromAddCar-footer {
+    background-color: var(--color-primary);
+    height: 7vh;
+}

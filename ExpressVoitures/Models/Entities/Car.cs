@@ -6,7 +6,7 @@
         public int Year { get; set; }
         public int Kilometer { get; set; }
         public string? Description { get; set; }
-        public bool Available { get; set; }
+        public CarStatus Status { get; set; } = CarStatus.InRepair;
 
         public int ManufacturerId { get; set; }
         public virtual Manufacturer? Manufacturer { get; set; }

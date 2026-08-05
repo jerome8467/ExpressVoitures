@@ -16,7 +16,7 @@ namespace ExpressVoitures.Models.ViewModels
             ErrorMessageResourceName = "MissingPassword")]
         public required string Password { get; set; }
 
-        public string ReturnUrl { get; set; } = "/";
+        public string? ReturnUrl { get; set; } = "/";
 
     }
 }

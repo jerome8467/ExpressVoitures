@@ -1,0 +1,224 @@
+﻿@using ExpressVoitures.Resources.Models.Entities
+@using ExpressVoitures.Models.Entities
+@model ExpressVoitures.Models.ViewModels.AllCarViewModel.CarAdminViewModel
+
+@{
+    ViewData["Title"] = "Ajoute une voiture";
+}
+
+<div class="ev-bodyAddCarAdminIndex">
+    <div class="ev-contentAddCarAdmin" style="height:100%;">
+
+        <div class="ev-contentColonneOne">
+
+            <div class="ev-ContainerManufacturer" onclick="window.location='/Manufacturer/ManufacturerIndex?fromAddCar=true'">
+                <div class="ev-AddCarTitle">
+                    <i class="bi-car-front"></i>
+                    <h1>Choix du véhicule</h1>
+                </div>
+                <div class="ev-ContentManufacturer">
+                    <span class="ev-ContentManufacturer-label">*Constructeur</span>
+                    <span class="ev-ContentManufacturer-Title @(!string.IsNullOrEmpty(Model?.ManufacturerName) ? "" : "empty")" id="selectedManufacturerName">
+                        @(Model?.ManufacturerName ?? "Aucun constructeur sélectionné")
+                    </span>
+                    <span asp-validation-for="ManufacturerId" class="text-danger"></span>
+
+                    <span class="ev-ContentManufacturer-label">*Modèle</span>
+                    <span class="ev-ContentManufacturer-Title @(!string.IsNullOrEmpty(Model?.VehicleModelName) ? "" : "empty")" id="selectedVehicleModelName">
+                        @(Model?.VehicleModelName ?? "Aucun modèle sélectionné")
+                    </span>
+                    <span asp-validation-for="VehicleModelId" class="text-danger"></span>
+
+                    <span class="ev-ContentManufacturer-label">*Finition</span>
+                    <span class="ev-ContentManufacturer-Title @(!string.IsNullOrEmpty(Model?.FinitionName) ? "" : "empty")" id="selectedFinitionName">
+                        @(Model?.FinitionName ?? "Aucune finition sélectionnée")
+                    </span>
+                    <span asp-validation-for="FinitionId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="ev-ContainerInformation">
+                <div class="ev-AddCarTitle">
+                    <i class="bi-list-ul"></i>
+                    <h1>Caractéristiques</h1>
+                </div>
+                <div class="ev-contentForInput">
+                    <div class="ev-contentWidthInput">
+                        <label for="visuelKilometer">*Nombre de kilomètre</label>
+                        <input class="ev-form-controlInput" type="text" id="visuelKilometer" />
+                        <span asp-validation-for="Kilometer" class="text-danger"></span>
+                    </div>
+                    <div class="ev-contentWidthInput">
+                        <label for="visuelYear">*Année</label>
+                        <select id="visuelYear" class="ev-form-controlInputselect">
+                            @for (int i = DateTime.Now.Year; i >= 1990; i--)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Year" class="text-danger"></span>
+                    </div>
+                    <div class="ev-contentWidthInput" style="height:100%;">
+                        <label for="visuelDescription">Description</label>
+                        <textarea class="ev-form-controlInput" id="visuelDescription" style="height:100%; resize:none;" rows="5" cols="33"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ev-contentColonneOne">
+
+            <div class="ev-ContainerRepairTransaction">
+                <div class="ev-AddCarTitle">
+                    <i class="bi-wrench-adjustable"></i>
+                    <h1>Réparations</h1>
+                </div>
+                <div class="ev-contentForInput">
+                    <div class="ev-contentWidthInput">
+                        <label for="visuelRepairPrice">*Cout des réparations</label>
+                        <input class="ev-form-controlInput" type="text" id="visuelRepairPrice" />
+                        <span asp-validation-for="RepairPrice" class="text-danger"></span>
+                    </div>
+                    <div class="ev-contentWidthInput" style="height:100%;">
+                        <label for="visuelTypeOfRepair">*Description des réparations</label>
+                        <textarea class="ev-form-controlInput" id="visuelTypeOfRepair" style="height:100%; resize:none;" rows="5" cols="33"></textarea>
+                        <span asp-validation-for="TypeOfRepair" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ev-ContainerRepairTransaction">
+                <div class="ev-AddCarTitle">
+                    <i class="bi-currency-euro"></i>
+                    <h1>Transaction</h1>
+                </div>
+                <div class="ev-contentForInput">
+                    <div style="display:flex; flex-direction:row; justify-content:space-between; gap:2rem;">
+                        <div class="ev-contentWidthInput">
+                            <label>*Date Acquisition</label>
+                            <div style="position: relative;">
+                                <input class="ev-form-controlInput" type="text" id="dateAcquisition" placeholder="" readonly />
+                                <button type="button" class="ev-btn-calendarRefresh" onclick="clearDateAcquisition()">
+                                    <i class="bi-arrow-counterclockwise"></i>
+                                </button>
+                            </div>
+                            <span asp-validation-for="PurchaseDate" class="text-danger"></span>
+                        </div>
+                        <div class="ev-contentWidthInput">
+                            <label>*Prix Achat</label>
+                            <input class="ev-form-controlInput" type="text" id="visuelPurchasePrice" />
+                            <span asp-validation-for="PurchasePrice" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div style="display:flex; flex-direction:row; justify-content:space-between; gap:2rem;">
+                        <div class="ev-contentWidthInput">
+                            <label>Date Mise en Ligne</label>
+                            <div style="position: relative;">
+                                <input class="ev-form-controlInput" type="text" id="dateMiseEnLigne" placeholder="" readonly />
+                                <button type="button" class="ev-btn-calendarRefresh" onclick="clearDateMiseEnLigne()">
+                                    <i class="bi-arrow-counterclockwise"></i>
+                                </button>
+                            </div>
+                            <span asp-validation-for="AvailabilityDate" class="text-danger"></span>
+                        </div>
+                        <div class="ev-contentWidthInput">
+                            <label>Date de Vente</label>
+                            <div style="position: relative;">
+                                <input class="ev-form-controlInput" type="text" id="dateVente" placeholder="" readonly />
+                                <button type="button" class="ev-btn-calendarRefresh" onclick="clearDateVente()">
+                                    <i class="bi-arrow-counterclockwise"></i>
+                                </button>
+                            </div>
+                            <span asp-validation-for="SaleDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div style="display:flex; flex-direction:row; justify-content:space-between; gap:2rem; height:100%;">
+                        <div class="ev-contentWidthInput" style="text-align:center;">
+                            <label>Montant Additionnel</label>
+                            <input class="ev-form-controlInput" type="text" id="visuelAdditionalAmount"
+                                   style="height:100%; text-align:center; font-size:1.2rem; font-weight:600;"
+                                   value="500" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ev-contentColonneTwo">
+
+            <div class="ev-ContainerImg">
+                <div class="ev-AddCarTitle" style="justify-content:space-between;">
+                    <div style="display:flex; align-items:center; gap:1rem;">
+                        <i class="bi-images"></i>
+                        <h1>Photos</h1>
+                    </div>
+                </div>
+                <div id="imageDropzone" class="dropzone ev-dropzone">
+                    <div class="dz-message">
+                        <i class="bi-cloud-upload" style="font-size:2rem;"></i>
+                        <p>Glissez vos photos ici ou cliquez pour en sélectionner</p>
+                    </div>
+                </div>
+                <div id="imagePreviewList" class="ev-imagePreviewList"></div>
+            </div>
+
+            <div class="ev-ContainerRow2">
+                <div class="ev-ContainerStatus">
+                    <div class="ev-AddCarTitle">
+                        <i class="bi-toggle-on"></i>
+                        <h1>Statut</h1>
+                    </div>
+                    <div class="ev-contentBtn-statut">
+                        <div class="ev-btn-statut selected" onclick="selectStatus(0, this)">
+                            <a>@CarStatusModelResources.GetLabel(CarStatus.InRepair)</a>
+                        </div>
+                        <div class="ev-btn-statut" onclick="selectStatus(1, this)">
+                            <a>@CarStatusModelResources.GetLabel(CarStatus.ForSale)</a>
+                        </div>
+                        <div class="ev-btn-statut" onclick="selectStatus(2, this)">
+                            <a>@CarStatusModelResources.GetLabel(CarStatus.Sold)</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ev-ContainerSave">
+                    <button type="submit" form="addCarForm">
+                        <i class="bi-floppy"></i>
+                        <h1>SAUVEGARDER</h1>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Formulaire minimal -->
+<form id="addCarForm" asp-controller="CarAdmin" asp-action="AddCarAdminIndex" method="post" enctype="multipart/form-data" style="display:none;">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="ManufacturerId" id="hiddenManufacturerId" />
+    <input type="hidden" asp-for="ManufacturerName" id="hiddenManufacturerName" />
+    <input type="hidden" asp-for="VehicleModelId" id="hiddenVehicleModelId" />
+    <input type="hidden" asp-for="VehicleModelName" id="hiddenVehicleModelName" />
+    <input type="hidden" asp-for="FinitionId" id="hiddenFinitionId" />
+    <input type="hidden" asp-for="FinitionName" id="hiddenFinitionName" />
+    <input type="hidden" asp-for="Year" id="hiddenYear" />
+    <input type="hidden" asp-for="Kilometer" id="hiddenKilometer" />
+    <input type="hidden" asp-for="Description" id="hiddenDescription" />
+    <input type="hidden" asp-for="RepairPrice" id="hiddenRepairPrice" />
+    <input type="hidden" asp-for="TypeOfRepair" id="hiddenTypeOfRepair" />
+    <input type="hidden" asp-for="PurchaseDate" id="hiddenPurchaseDate" />
+    <input type="hidden" asp-for="PurchasePrice" id="hiddenPurchasePrice" />
+    <input type="hidden" asp-for="AvailabilityDate" id="hiddenAvailabilityDate" />
+    <input type="hidden" asp-for="SaleDate" id="hiddenSaleDate" />
+    <input type="hidden" asp-for="AdditionalAmount" id="hiddenAdditionalAmount" value="500" />
+    <input type="hidden" asp-for="Status" id="hiddenStatus" value="0" />
+</form>
+
+@section Scripts {
+    <script src="~/js/carAdmin.js"></script>
+}

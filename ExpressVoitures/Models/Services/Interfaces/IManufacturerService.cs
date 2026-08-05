@@ -1,5 +1,5 @@
 ﻿using ExpressVoitures.Models.Entities;
-using ExpressVoitures.Models.ViewModels;
+using ExpressVoitures.Models.ViewModels.AllManufacturerViewModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace ExpressVoitures.Models.Services.Interfaces
@@ -12,5 +12,7 @@ namespace ExpressVoitures.Models.Services.Interfaces
         public Task<List<ValidationResult>> AddManufacturer(ManufacturerViewModel manufacturerNew);
         public Task<List<ValidationResult>> UpdateManufacturer(ManufacturerViewModel manufacturerUpdate);
         public Task DeleteManufacturer(int id);
+        public Task <List<ManufacturerDashboardViewModel>> GetAllManufacturerForDashboard();
+
     }
 }

@@ -1,0 +1,155 @@
+﻿@using ExpressVoitures.Resources.Views.Dashboard
+@using ExpressVoitures.Resources.Models.Entities
+@using ExpressVoitures.Resources.Views.Shared
+@using ExpressVoitures.Models.ViewModels.AllCarViewModel
+@using ExpressVoitures.Models.ViewModels.AllManufacturerViewModel
+@model ExpressVoitures.Models.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="ev-bodyDashboard">
+    <div class="ev-bodyDashboardContent">
+        <div class="ev-bodyDashboardStat">
+            <div class="ev-bodyDashboardinside">
+                <img src="/images/Dashboard/CostRepair.png" />
+                <div class="ev-bodyDashboardinsideTitle">
+                <i class="bi-tools"></i>
+                    <a>@DashboardViewResources.AverageRepairCost</a>
+                </div>  
+                <div class="ev-bodyDashboardinsideResult">
+                    <p>@Model.AverageRepairCost €</p>
+                </div>
+            </div>
+            <div class="ev-bodyDashboardinside">
+                <img src="/images/Dashboard/CarRepairCOunt.png" />
+                <div class="ev-bodyDashboardinsideTitle">
+                <i class="bi-wrench-adjustable"></i>
+                    <a>@DashboardViewResources.CarsInRepair</a>
+                </div>
+                <div class="ev-bodyDashboardinsideResult">
+                    <p>@Model.CarsInRepair</p>
+                </div>
+            </div>
+            <div class="ev-bodyDashboardinside">
+                <img src="/images/Dashboard/CarForSale.png" />
+                <div class="ev-bodyDashboardinsideTitle">
+                <i class="bi-tag"></i>
+                    <a>@DashboardViewResources.CarsForSale</a>
+                </div>
+                <div class="ev-bodyDashboardinsideResult">
+                    <p>@Model.CarsForSale</p>
+                </div>
+            </div>
+            <div class="ev-bodyDashboardinside">
+                <img src="/images/Dashboard/CarSoldCount.png" />
+                <div class="ev-bodyDashboardinsideTitle">
+                <i class="bi-check-circle"></i>
+                    <a>@DashboardViewResources.CarsSold</a>
+                </div>
+                <div class="ev-bodyDashboardinsideResult">
+                    <p>@Model.CarsSold</p>
+                </div>
+            </div>
+            <div class="ev-bodyDashboardinside">
+                <img src="/images/Dashboard/TotalChiffre.png" />
+                <div class="ev-bodyDashboardinsideTitle">
+                <i class="bi-currency-euro"></i>
+                    <a>@DashboardViewResources.TotalRevenue</a>
+                </div>
+                <div class="ev-bodyDashboardinsideResult">
+                    <p>@Model.TotalRevenue €</p>
+                </div>
+            </div>
+            <div class="ev-bodyDashboardinside">
+                <img src="/images/Dashboard/TimeDelayCar.png" />
+                <div class="ev-bodyDashboardinsideTitle">
+                <i class="bi-clock-history"></i>
+                    <a>@DashboardViewResources.AverageDaysBeforeSale</a>
+                </div>
+                <div class="ev-bodyDashboardinsideResult">
+                    <p>@Model.AverageDaysBeforeSale @DashboardViewResources.Days</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="evbodyDashboardTabCarManu">
+            <div class="evbodyDashboardTabCar">
+                <div class="evbodyDashboardTabTitle">
+                    <p>@DashboardViewResources.ListCar</p>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <a class="ev-nav-btn-dashboard" asp-controller="CarAdmin" asp-action="AddCarAdminIndex" title=@LayoutViewResources.AddCar>
+                            <i class="bi bi-plus-circle"></i>
+                            @LayoutViewResources.AddCar
+                        </a>
+                    }
+                </div>
+                <div class="ev-contenairTab">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="tOne">@DashboardViewResources.Manufacturer</th>
+                                <th class="tTwo">@DashboardViewResources.VehicleModel</th>
+                                <th class="tOne">@DashboardViewResources.Finition</th>
+                                <th class="tTwo">@DashboardViewResources.PurchasePrice</th>
+                                <th class="tOne">@DashboardViewResources.RepairPrice</th>
+                                <th class="tTwo" style="border-right:none">@DashboardViewResources.Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var car in Model.CarAdminViewModels ?? new List<CarAdminViewModel>())
+                            {
+                                <tr onclick="window.location='/CarAdmin/EditCarAdminIndex/@car.CarId'">
+                                    <td class="rOne">@car.ManufacturerName</td>
+                                    <td class="rTwo">@car.VehicleModelName</td>
+                                    <td class="rOne">@car.FinitionName</td>
+                                    <td class="rTwo">@car.PurchasePrice</td>
+                                    <td class="rOne">@car.RepairPrice</td>
+                                    <td class="rTwo" style="border-right:none">@CarStatusModelResources.GetLabel(car.Status)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="evbodyDashboardTabManu">
+                <div class="evbodyDashboardTabTitle">
+                    <p>@DashboardViewResources.ListManufacturer</p>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <a class="ev-nav-btn-dashboard" asp-controller="Manufacturer" asp-action="ManufacturerIndex" title=@DashboardViewResources.AddNewManufacturer>
+                            <i class="bi bi-plus-circle"></i>
+                            @DashboardViewResources.AddNewManufacturer
+                        </a>
+                    }
+                    </div>
+                <div class="ev-contenairTab">
+                <table>
+                    <thead>
+                        <tr>
+                                <th class="tOne">@DashboardViewResources.Manufacturer</th>
+                                <th class="tTwo">@DashboardViewResources.CountVehicleModel</th>
+                                <th class="tOne">@DashboardViewResources.CountFinition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var manufacturer in Model.ManufacturerDashboardViewModelList ?? new List<ManufacturerDashboardViewModel>())
+                        {
+                                <tr onclick="window.location='@Url.Action("ManufacturerIndex", "Manufacturer", new { ManufacturerId = manufacturer.Id })'">
+                                <td class="rOne">@manufacturer.Name</td>
+                                <td class="rTwo">@manufacturer.CountVehicleModel</td>
+                                <td class="rOne">@manufacturer.CountFinition</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

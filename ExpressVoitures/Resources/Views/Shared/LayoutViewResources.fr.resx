@@ -117,13 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InvalidEmail" xml:space="preserve">
-    <value>L'adresse email n'est pas valide</value>
+  <data name="AddCar" xml:space="preserve">
+    <value>AJOUTER UNE VOITURE</value>
   </data>
-  <data name="MissingEmail" xml:space="preserve">
-    <value>Un email est obligatoire</value>
+  <data name="GoToAdmin" xml:space="preserve">
+    <value>ADMINISTRATION</value>
   </data>
-  <data name="MissingPassword" xml:space="preserve">
-    <value>Le mot de passe est obligatoire</value>
+  <data name="Home" xml:space="preserve">
+    <value>ACCUEIL</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Se connecter</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Se déconnecter</value>
+  </data>
+  <data name="OurCars" xml:space="preserve">
+    <value>NOS VOITURES</value>
   </data>
 </root>
