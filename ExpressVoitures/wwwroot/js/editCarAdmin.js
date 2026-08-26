@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         url: "/CarAdmin/AddImage",
         acceptedFiles: "image/*",
         addRemoveLinks: false,
-        autoProcessQueue: false,
+        autoProcessQueue: true,
         thumbnailWidth: 120,
         thumbnailHeight: 120,
         previewsContainer: false,
@@ -160,9 +160,14 @@ function setCover(preview) {
 }
 
 function setCoverExisting(btn, imageId) {
-    fetch(`/CarAdmin/SetCover?imageId=${imageId}&carId=${document.querySelector('[name="CarId"]').value}`, {
+    const formData = new FormData();
+    formData.append('imageId', imageId);
+    formData.append('carId', document.querySelector('[name="CarId"]').value);
+    formData.append('__RequestVerificationToken', document.querySelector('input[name="__RequestVerificationToken"]').value);
+
+    fetch('/CarAdmin/SetCover', {
         method: 'POST',
-        headers: { 'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value }
+        body: formData
     }).then(response => {
         if (response.ok) {
             document.querySelectorAll('.ev-imagePreview').forEach(el => {

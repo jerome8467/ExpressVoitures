@@ -48,16 +48,19 @@ namespace ExpressVoitures.Models.Repositories
 
         public async Task UpdateCar(Car car, CarRepair carRepair, CarTransaction carTransaction)
         {
-            Car? carCurrent = await GetByIdCar(car.Id);
+            Car? carCurrent = await _dataBase.Car.AsNoTracking().FirstOrDefaultAsync(c => c.Id == car.Id);
+            CarRepair? carRepairCurrent = await _dataBase.CarRepair.AsNoTracking().FirstOrDefaultAsync(c => c.Id == carRepair.Id);
+            CarTransaction? carTransactionCurrent = await _dataBase.CarTransaction.AsNoTracking().FirstOrDefaultAsync(c => c.Id == carTransaction.Id);
 
             if (carCurrent == null) return;
                 _dataBase.Car.Update(car);
 
-            if (carCurrent.CarRepair == null) return; 
+            if (carRepairCurrent == null) return; 
                 _dataBase.CarRepair.Update(carRepair);
 
-            if (carCurrent.CarTransaction == null) return;
+            if (carTransactionCurrent == null) return;
                 _dataBase.CarTransaction.Update(carTransaction);
+
 
             await _dataBase.SaveChangesAsync();
 

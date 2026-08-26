@@ -15,7 +15,9 @@ namespace ExpressVoitures.Models.Services.Interfaces
         Task DeleteCar(CarAdminViewModel carAdminViewModel);
         Task AddCarImage(CarImageViewModel carImageViewModel, CarAdminViewModel carAdminViewModel);
         Task DeleteCarImage(CarImageViewModel carImageViewModel, CarAdminViewModel carAdminViewModel);
-        Task SetCarImageAsCover(CarImageViewModel carImageViewModel, CarAdminViewModel carAdminViewModel);
+
+        //Task SetCarImageAsCover(CarImageViewModel carImageViewModel, CarAdminViewModel carAdminViewModel);
+        Task SetCarImageAsCover(int imageId, int carId);
 
     }
 }

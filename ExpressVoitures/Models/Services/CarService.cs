@@ -132,6 +132,7 @@ namespace ExpressVoitures.Models.Services
             if (carAdminViewModel.ImagesList?.Count == 0) carImageViewModel.IsCover = true;
             
             CarImage carImage = CarMapper.MapToCarImageFromDatabase(carImageViewModel, true);
+            carImage.CarId = carAdminViewModel.CarId;
             await _carImageRepository.AddCarImage(carImage);
 
             carImageViewModel.ImageId = carImage.Id;
@@ -159,7 +160,7 @@ namespace ExpressVoitures.Models.Services
             }
         }
 
-        public async Task SetCarImageAsCover(CarImageViewModel carImageViewModel, CarAdminViewModel carAdminViewModel)
+        /*public async Task SetCarImageAsCover(CarImageViewModel carImageViewModel, CarAdminViewModel carAdminViewModel)
         {
             carImageViewModel.IsCover = true;
 
@@ -175,9 +176,30 @@ namespace ExpressVoitures.Models.Services
             CarImage carImageFromDatabaseTrue = CarMapper.MapToCarImageFromDatabase(carImageViewModel, false);
             await _carImageRepository.UpdateCarImage(carImageFromDatabaseTrue);
 
+        }*/
+
+        public async Task SetCarImageAsCover(int imageId, int carId)
+        {
+            IEnumerable<CarImage> ImageList  = (await _carImageRepository.GetAllCarImage(carId)).ToList();
+
+            CarImage? carImageNewCover = ImageList.FirstOrDefault(i => i.Id == imageId);
+            CarImage? carImageOldCover = ImageList.FirstOrDefault(c => c.IsCover == true);
+
+            if (carImageOldCover != null)
+            {
+                carImageOldCover.IsCover = false;
+                await _carImageRepository.UpdateCarImage(carImageOldCover);
+            }
+
+            if(carImageNewCover != null)
+            {
+                carImageNewCover.IsCover = true;
+                await _carImageRepository.UpdateCarImage(carImageNewCover);
+            }
+
         }
 
-        
+
 
     }
 }

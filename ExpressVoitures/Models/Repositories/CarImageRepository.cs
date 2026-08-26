@@ -40,8 +40,8 @@ namespace ExpressVoitures.Models.Repositories
         {
             CarImage? carImageCurrent = await _dataBase.CarImage.FirstOrDefaultAsync(f => f.Id == carImageUpdate.Id);
             if (carImageCurrent == null) return;
-                _dataBase.CarImage.Update(carImageUpdate);
-                await _dataBase.SaveChangesAsync();
+            _dataBase.CarImage.Update(carImageUpdate);
+            await _dataBase.SaveChangesAsync();
         }
 
         public async Task DeleteCarImage(int id)

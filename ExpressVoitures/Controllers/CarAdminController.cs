@@ -98,7 +98,7 @@ namespace ExpressVoitures.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SetCover(int imageId, int carId)
         {
@@ -107,6 +107,14 @@ namespace ExpressVoitures.Controllers
             var image = car.ImagesList?.FirstOrDefault(i => i.ImageId == imageId);
             if (image == null) return NotFound();
             await _carService.SetCarImageAsCover(image, car);
+            return Ok();
+        }*/
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SetCover(int imageId, int carId)
+        {
+            await _carService.SetCarImageAsCover(imageId, carId);
             return Ok();
         }
 
