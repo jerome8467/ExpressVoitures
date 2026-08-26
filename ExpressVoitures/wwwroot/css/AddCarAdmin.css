@@ -610,8 +610,8 @@ ev-form-controlInputselect {
 
 .ev-imagePreview {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 200px;
+    height: 130px;
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid var(--color-primaire);
