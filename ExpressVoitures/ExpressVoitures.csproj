@@ -18,4 +18,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\CarAdmin\" />
+    <Folder Include="Views\Manufacturer\" />
+  </ItemGroup>
+
 </Project>
