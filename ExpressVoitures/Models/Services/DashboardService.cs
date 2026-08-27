@@ -87,7 +87,7 @@ namespace ExpressVoitures.Models.Services
             double totalDay = 0;
             foreach (var day in soldCars)
             {
-                totalDay += day.SaleDate!.Value.DayNumber - day.PurchaseDate!.Value.DayNumber; 
+                totalDay += (day.SaleDate!.Value.ToDateTime(TimeOnly.MinValue) - day.PurchaseDate!.Value.ToDateTime(TimeOnly.MinValue)).TotalDays;
             }
 
             totalDay = totalDay / count;

@@ -9,10 +9,10 @@ namespace ExpressVoitures.Attributes
         {
 
             if (!double.TryParse(value?.ToString(), out double Double))
-                return new ValidationResult(CarAdminViewModelResources.NotNumber, new[] { "Double" });
+                return new ValidationResult(CarAdminViewModelResources.NotNumber, new[] { validationContext.MemberName ?? string.Empty });
 
             if (Convert.ToDouble(Double) <= 0)
-                return new ValidationResult(CarAdminViewModelResources.NumberNotGreaterZero, new[] { "Double" });
+                return new ValidationResult(CarAdminViewModelResources.NumberNotGreaterZero, new[] { validationContext.MemberName ?? string.Empty });
 
 
             return ValidationResult.Success;

@@ -65,9 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('visuelPurchasePrice').value = container.dataset.purchaseprice ?? '';
     document.getElementById('visuelAdditionalAmount').value = container.dataset.additionalamount ?? '';
 
-    if (container.dataset.purchasedate) dateAcquisitionPicker.setDate(container.dataset.purchasedate);
-    if (container.dataset.availabilitydate) dateMiseEnLignePicker.setDate(container.dataset.availabilitydate);
-    if (container.dataset.saledate) dateVentePicker.setDate(container.dataset.saledate);
+    if (container.dataset.purchasedate) dateAcquisitionPicker.setDate(container.dataset.purchasedate, false, "Y-m-d");
+    if (container.dataset.availabilitydate) dateMiseEnLignePicker.setDate(container.dataset.availabilitydate, false, "Y-m-d");
+    if (container.dataset.saledate) dateVentePicker.setDate(container.dataset.saledate, false, "Y-m-d");
 
     const tomYear = document.getElementById('visuelYear').tomselect;
     if (tomYear) tomYear.setValue(container.dataset.year);

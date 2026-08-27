@@ -64,6 +64,13 @@ namespace ExpressVoitures.Resources.Models.ViewModels.CarAdminViewModel
                 return ResourceManager.GetString("MissingYear", CultureInfo) ?? string.Empty;
             }
         }
+        public static string YearTooOld
+        {
+            get
+            {
+                return ResourceManager.GetString("YearTooOld", CultureInfo) ?? string.Empty;
+            }
+        }
 
         public static string MissingKilometer
         {

@@ -153,4 +153,7 @@
   <data name="MissingDate" xml:space="preserve">
     <value>Une date est obligatoire</value>
   </data>
+  <data name="YearTooOld" xml:space="preserve">
+    <value>L'année doit être supérieure ou égale à 1990</value>
+  </data>
 </root>

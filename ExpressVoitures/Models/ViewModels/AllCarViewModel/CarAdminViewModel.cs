@@ -41,6 +41,8 @@ namespace ExpressVoitures.Models.ViewModels.AllCarViewModel
         [Required(ErrorMessageResourceType = typeof(CarAdminViewModelResources),
             ErrorMessageResourceName = "MissingYear")]
         [IntegerValidation]
+        [Range(1990, int.MaxValue, ErrorMessageResourceType = typeof(CarAdminViewModelResources),
+        ErrorMessageResourceName = "YearTooOld")]
         public string Year { get; set; } = DateTime.Now.Year.ToString();
 
 

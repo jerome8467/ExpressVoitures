@@ -12,6 +12,11 @@ namespace ExpressVoitures.Models.ViewModels
         public required string Name { get; set; }
 
         public string? ManufacturerName { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(CarAdminViewModelResources),
+        ErrorMessageResourceName = "MissingManufacturer")]
+        [Range(1, int.MaxValue, ErrorMessageResourceType = typeof(CarAdminViewModelResources),
+        ErrorMessageResourceName = "MissingManufacturer")]
         public int ManufacturerId { get; set; }
     }
 }

@@ -115,7 +115,7 @@ namespace ExpressVoitures.Resources.Views.Dashboard
         {
             get
             {
-                return resourceManager.GetString("PurchasePrice", CultureInfo) ?? string.Empty;
+                return resourceManager.GetString("RepairPrice", CultureInfo) ?? string.Empty;
             }
         }
 
