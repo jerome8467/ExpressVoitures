@@ -12,7 +12,7 @@ namespace ExpressVoitures.Models.Services.Interfaces
         Task<CarAdminViewModel?> GetByIdCarAdminViewModel(int id);
         Task<List<ValidationResult>> AddCar(CarAdminViewModel carAdminViewModel);
         Task<List<ValidationResult>> UpdateCar(CarAdminViewModel carAdminViewModel);
-        Task DeleteCar(CarAdminViewModel carAdminViewModel);
+        Task DeleteCar(int carId);
         Task AddCarImage(CarImageViewModel carImageViewModel, CarAdminViewModel carAdminViewModel);
         Task DeleteCarImage(CarImageViewModel carImageViewModel, CarAdminViewModel carAdminViewModel);
 

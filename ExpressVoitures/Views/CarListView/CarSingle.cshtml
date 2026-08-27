@@ -76,9 +76,10 @@
                     <span>@CarListViewResources.Change</span>
                     </a>
                 </div>
-                <div class="ev-singleAdminbtn">
+                <form class="ev-singleAdminbtn" asp-controller="CarAdmin" asp-action="DeleteCarAdminIndex" method="post">
+                    <input type="hidden" name="carId" value="@Model.Id" />
                     <span>@CarListViewResources.Delete</span>
-                </div>
+                </form>
             </div>
     </div>
                 }

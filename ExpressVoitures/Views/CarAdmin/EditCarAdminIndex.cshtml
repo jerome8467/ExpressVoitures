@@ -257,7 +257,6 @@ style="justify-content:center;">
 </div>
 
 <form id="editCarForm" asp-controller="CarAdmin" asp-action="EditCarAdminIndex" method="post" enctype="multipart/form-data" style="display:none;">
-    @Html.AntiForgeryToken()
     <input type="hidden" asp-for="CarId" />
     <input type="hidden" asp-for="CarRepairId" />
     <input type="hidden" asp-for="CarTransactionId" />
@@ -281,7 +280,6 @@ style="justify-content:center;">
 </form>
 
 <form id="deleteCarForm" asp-controller="CarAdmin" asp-action="DeleteCarAdminIndex" method="post" style="display:none;">
-    @Html.AntiForgeryToken()
     <input type="hidden" asp-for="CarId" />
 </form>
 

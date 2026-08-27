@@ -121,9 +121,9 @@ namespace ExpressVoitures.Models.Services
             return new List<ValidationResult>();
         }
 
-        public async Task DeleteCar(CarAdminViewModel carAdminViewModel)
+        public async Task DeleteCar(int carId)
         {
-            await _carRepository.DeleteCar(carAdminViewModel.CarId);
+            await _carRepository.DeleteCar(carId);
         }
 
 

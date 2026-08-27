@@ -22,7 +22,6 @@ namespace ExpressVoitures.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddCarAdminIndex(CarAdminViewModel carAdminViewModel, List<IFormFile> images)
         {
             if (!ModelState.IsValid)
@@ -65,7 +64,6 @@ namespace ExpressVoitures.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditCarAdminIndex(CarAdminViewModel carAdminViewModel, List<IFormFile> images)
         {
             if (!ModelState.IsValid)
@@ -83,35 +81,21 @@ namespace ExpressVoitures.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteCarAdminIndex(CarAdminViewModel carAdminViewModel)
+        public async Task<IActionResult> DeleteCarAdminIndex(int carId)
         {
-            await _carService.DeleteCar(carAdminViewModel);
+            await _carService.DeleteCar(carId);
             return RedirectToAction("DashboardIndex", "Dashboard");
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteImage(int imageId)
         {
             await _carService.DeleteCarImage(new CarImageViewModel { ImageId = imageId }, new CarAdminViewModel());
             return Ok();
         }
 
-        /*[HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SetCover(int imageId, int carId)
-        {
-            var car = await _carService.GetByIdCarAdminViewModel(carId);
-            if (car == null) return NotFound();
-            var image = car.ImagesList?.FirstOrDefault(i => i.ImageId == imageId);
-            if (image == null) return NotFound();
-            await _carService.SetCarImageAsCover(image, car);
-            return Ok();
-        }*/
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> SetCover(int imageId, int carId)
         {
             await _carService.SetCarImageAsCover(imageId, carId);
@@ -119,7 +103,6 @@ namespace ExpressVoitures.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddImage(IFormFile image, int carId)
         {
             string fileName = Guid.NewGuid() + Path.GetExtension(image.FileName);
