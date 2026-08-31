@@ -6,7 +6,7 @@
         public double RepairPrice { get; set; }
         public required string TypeOfRepair { get; set; }
         public int CarId { get; set; }
-        public virtual Car? Car { get; set; }
+        /*public  Car? Car { get; set; }*/
 
     }
 }

@@ -42,31 +42,31 @@ namespace ExpressVoitures.Data
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<VehicleModel>()
-                .HasOne(v => v.Manufacturer)
+                .HasOne<Manufacturer>()
                 .WithMany(m => m.VehicleModel)
                 .HasForeignKey(v => v.ManufacturerId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Finition>()
-                .HasOne(f => f.VehicleModel)
+                .HasOne<VehicleModel>()
                 .WithMany(v => v.Finition)
                 .HasForeignKey(f => f.VehicleModelId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CarRepair>()
-                .HasOne(r => r.Car)
+                .HasOne<Car>()
                 .WithOne(c => c.CarRepair)
                 .HasForeignKey<CarRepair>(r => r.CarId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CarTransaction>()
-                .HasOne(t => t.Car)
+                .HasOne<Car>()
                 .WithOne(c => c.CarTransaction)
                 .HasForeignKey<CarTransaction>(t => t.CarId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CarImage>()
-                .HasOne(i => i.Car)
+                .HasOne<Car>()
                 .WithMany(c => c.CarImage)
                 .HasForeignKey(i => i.CarId)
                 .OnDelete(DeleteBehavior.Cascade);

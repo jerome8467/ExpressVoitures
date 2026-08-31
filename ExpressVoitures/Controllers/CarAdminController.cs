@@ -88,9 +88,15 @@ namespace ExpressVoitures.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteImage(int imageId)
+        public async Task<IActionResult> DeleteImage(int imageId, int carId)
         {
-            await _carService.DeleteCarImage(new CarImageViewModel { ImageId = imageId }, new CarAdminViewModel());
+            /*await _carService.DeleteCarImage(new CarImageViewModel { ImageId = imageId }, new CarAdminViewModel());
+            return Ok();*/
+            var car = await _carService.GetByIdCarAdminViewModel(carId);
+            if (car == null) return NotFound();
+            var image = car.ImagesList?.FirstOrDefault(i => i.ImageId == imageId);
+            if (image == null) return NotFound();
+            await _carService.DeleteCarImage(image, car);
             return Ok();
         }
 
@@ -103,7 +109,7 @@ namespace ExpressVoitures.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddImage(IFormFile image, int carId)
+        public async Task<IActionResult> AddImage([FromForm] IFormFile image, int carId)
         {
             string fileName = Guid.NewGuid() + Path.GetExtension(image.FileName);
             string filePath = Path.Combine("wwwroot", "images", "cars", fileName);

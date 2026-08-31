@@ -154,10 +154,13 @@
 
 
 @section Scripts {
+
     <script>
         const fromAddCar = @(ViewBag.FromAddCar == true ? "true" : "false");
+        const editCarId = @Html.Raw(ViewBag.CarId != null ? ViewBag.CarId.ToString() : "null");
     </script>
     <script src="~/js/manufacturer.js"></script>
+
     @if (Model.SelectedManufacturerId != null)
     {
         <script>

@@ -17,11 +17,17 @@ namespace ExpressVoitures.Data
             /////////////////////// VOLKSWAGEN ///////////////////////
             var volkswagen = context.Manufacturer.First(m => m.Name == "Volkswagen");
 
-            var golfVolkswagen = context.VehicleModel.Include(v => v.Manufacturer).First(v => v.Name == "Golf" && v.Manufacturer!.Name == "Volkswagen");
-            var lifeVolkswagen = context.Finition.Include(f => f.VehicleModel).First(f => f.Name == "Life" && f.VehicleModel!.Name == "Golf");
+            var golfVolkswagen = context.VehicleModel
+                .First(v => v.Name == "Golf" && v.ManufacturerId == volkswagen.Id);
 
-            var poloVolkswagen = context.VehicleModel.Include(v => v.Manufacturer).First(v => v.Name == "Polo" && v.Manufacturer!.Name == "Volkswagen");
-            var confortlineVolkswagen = context.Finition.Include(f => f.VehicleModel).First(f => f.Name == "Confortline" && f.VehicleModel!.Name == "Polo");
+            var lifeVolkswagen = context.Finition
+                .First(f => f.Name == "Life" && f.VehicleModelId == golfVolkswagen.Id);
+
+            var poloVolkswagen = context.VehicleModel
+                .First(v => v.Name == "Polo" && v.ManufacturerId == volkswagen.Id);
+
+            var confortlineVolkswagen = context.Finition
+                .First(f => f.Name == "Confortline" && f.VehicleModelId == poloVolkswagen.Id);
 
             var carGolf = new Car
             {
@@ -104,11 +110,15 @@ namespace ExpressVoitures.Data
             /////////////////////// TOYOTA ///////////////////////
             var toyota = context.Manufacturer.First(m => m.Name == "Toyota");
 
-            var corollaToyota = context.VehicleModel.Include(v => v.Manufacturer).First(v => v.Name == "Corolla" && v.Manufacturer!.Name == "Toyota");
-            var grsportToyota = context.Finition.Include(f => f.VehicleModel).First(f => f.Name == "GR SPORT" && f.VehicleModel!.Name == "Corolla");
+            var corollaToyota = context.VehicleModel
+                .First(v => v.Name == "Corolla" && v.ManufacturerId == toyota.Id);
+            var grsportToyota = context.Finition
+                .First(f => f.Name == "GR SPORT" && f.VehicleModelId == corollaToyota.Id);
 
-            var ravToyota = context.VehicleModel.Include(v => v.Manufacturer).First(v => v.Name == "RAV4" && v.Manufacturer!.Name == "Toyota");
-            var dynamicToyota = context.Finition.Include(f => f.VehicleModel).First(f => f.Name == "Dynamic" && f.VehicleModel!.Name == "RAV4");
+            var ravToyota = context.VehicleModel
+                .First(v => v.Name == "RAV4" && v.ManufacturerId == toyota.Id);
+            var dynamicToyota = context.Finition
+                .First(f => f.Name == "Dynamic" && f.VehicleModelId == ravToyota.Id);
 
             var carCorolla = new Car
             {
@@ -191,11 +201,15 @@ namespace ExpressVoitures.Data
             /////////////////////// FORD ///////////////////////
             var ford = context.Manufacturer.First(m => m.Name == "Ford");
 
-            var mustangFord = context.VehicleModel.Include(v => v.Manufacturer).First(v => v.Name == "Mustang" && v.Manufacturer!.Name == "Ford");
-            var matcheFord = context.Finition.Include(f => f.VehicleModel).First(f => f.Name == "MACH-E" && f.VehicleModel!.Name == "Mustang");
+            var mustangFord = context.VehicleModel
+                .First(v => v.Name == "Mustang" && v.ManufacturerId == ford.Id);
+            var matcheFord = context.Finition
+                .First(f => f.Name == "MACH-E" && f.VehicleModelId == mustangFord.Id);
 
-            var fiestaFord = context.VehicleModel.Include(v => v.Manufacturer).First(v => v.Name == "Fiesta" && v.Manufacturer!.Name == "Ford");
-            var activeFord = context.Finition.Include(f => f.VehicleModel).First(f => f.Name == "Active" && f.VehicleModel!.Name == "Fiesta");
+            var fiestaFord = context.VehicleModel
+                .First(v => v.Name == "Fiesta" && v.ManufacturerId == ford.Id);
+            var activeFord = context.Finition
+                .First(f => f.Name == "Active" && f.VehicleModelId == fiestaFord.Id);
 
             var carMustang = new Car
             {
@@ -277,11 +291,15 @@ namespace ExpressVoitures.Data
             /////////////////////// RENAULT ///////////////////////
             var renault = context.Manufacturer.First(m => m.Name == "Renault");
 
-            var clioRenault = context.VehicleModel.Include(v => v.Manufacturer).First(v => v.Name == "Clio" && v.Manufacturer!.Name == "Renault");
-            var intensRenault = context.Finition.Include(f => f.VehicleModel).First(f => f.Name == "Intens" && f.VehicleModel!.Name == "Clio");
+            var clioRenault = context.VehicleModel
+                .First(v => v.Name == "Clio" && v.ManufacturerId == renault.Id);
+            var intensRenault = context.Finition
+                .First(f => f.Name == "Intens" && f.VehicleModelId == clioRenault.Id);
 
-            var scenicRenault = context.VehicleModel.Include(v => v.Manufacturer).First(v => v.Name == "Scénic" && v.Manufacturer!.Name == "Renault");
-            var technoRenault = context.Finition.Include(f => f.VehicleModel).First(f => f.Name == "Techno" && f.VehicleModel!.Name == "Scénic");
+            var scenicRenault = context.VehicleModel
+                .First(v => v.Name == "Scénic" && v.ManufacturerId == renault.Id);
+            var technoRenault = context.Finition
+                .First(f => f.Name == "Techno" && f.VehicleModelId == scenicRenault.Id);
 
             var carClio = new Car
             {
@@ -363,11 +381,15 @@ namespace ExpressVoitures.Data
             /////////////////////// PEUGEOT ///////////////////////
             var peugeot = context.Manufacturer.First(m => m.Name == "Peugeot");
 
-            var troiscenthuitPeugeot = context.VehicleModel.Include(v => v.Manufacturer).First(v => v.Name == "308" && v.Manufacturer!.Name == "Peugeot");
-            var techEditionPeugeot = context.Finition.Include(f => f.VehicleModel).First(f => f.Name == "Tech Edition" && f.VehicleModel!.Name == "308");
+            var troiscenthuitPeugeot = context.VehicleModel
+                .First(v => v.Name == "308" && v.ManufacturerId == peugeot.Id);
+            var techEditionPeugeot = context.Finition
+                .First(f => f.Name == "Tech Edition" && f.VehicleModelId == troiscenthuitPeugeot.Id);
 
-            var quatrecenthuitPeugeot = context.VehicleModel.Include(v => v.Manufacturer).First(v => v.Name == "408" && v.Manufacturer!.Name == "Peugeot");
-            var allurePeugeot = context.Finition.Include(f => f.VehicleModel).First(f => f.Name == "Allure" && f.VehicleModel!.Name == "408");
+            var quatrecenthuitPeugeot = context.VehicleModel
+                .First(v => v.Name == "408" && v.ManufacturerId == peugeot.Id);
+            var allurePeugeot = context.Finition
+                .First(f => f.Name == "Allure" && f.VehicleModelId == quatrecenthuitPeugeot.Id);
 
             var car308 = new Car
             {

@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public required string Name { get; set; }
 
-        public virtual ICollection<VehicleModel> VehicleModel { get; set; } = new List<VehicleModel>();
+        public ICollection<VehicleModel> VehicleModel { get; set; } = new List<VehicleModel>();
 
     }
 }

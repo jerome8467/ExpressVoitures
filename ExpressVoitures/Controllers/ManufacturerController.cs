@@ -20,7 +20,7 @@ namespace ExpressVoitures.Controllers
             _finitionService = finitionService;
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public async Task<IActionResult> ManufacturerIndex(int? ManufacturerId = null, bool fromAddCar = false)
         {
             ManufacturerEditViewModel manufacturerEditViewModel = new ManufacturerEditViewModel
@@ -31,7 +31,20 @@ namespace ExpressVoitures.Controllers
             ViewBag.FromAddCar = fromAddCar;
 
             return View(manufacturerEditViewModel);
+        }*/
+        [HttpGet]
+        public async Task<IActionResult> ManufacturerIndex(int? ManufacturerId = null, bool fromAddCar = false, int? carId = null)
+        {
+            ManufacturerEditViewModel manufacturerEditViewModel = new ManufacturerEditViewModel
+            {
+                Manufacturers = await _manufacturerService.GetAllManufacturerViewModel(),
+                SelectedManufacturerId = ManufacturerId
+            };
+            ViewBag.FromAddCar = fromAddCar;
+            ViewBag.CarId = carId.HasValue ? (int?)carId.Value : null;
+            return View(manufacturerEditViewModel);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> GetVehicleModels(int ManufacturerId)

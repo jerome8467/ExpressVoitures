@@ -8,13 +8,11 @@ namespace ExpressVoitures.Models.Services
 {
     public class VehicleModelService : IVehicleModelService
     {
-        private readonly IFinitionRepository _finitionRepository;
         private readonly IVehicleModelRepository _vehicleModelRepository;
 
-        public VehicleModelService(IVehicleModelRepository vehicleModelRepository, IFinitionRepository finitionRepository)
+        public VehicleModelService(IVehicleModelRepository vehicleModelRepository)
         {
             _vehicleModelRepository = vehicleModelRepository;
-            _finitionRepository = finitionRepository;
         }
 
         private List<VehicleModelViewModel> MapToViewModel(IEnumerable<VehicleModel> vehicleModelDb)
@@ -26,8 +24,8 @@ namespace ExpressVoitures.Models.Services
                 {
                     Id = vehicleModel.Id,
                     Name = vehicleModel.Name,
-                    ManufacturerId = vehicleModel.Manufacturer?.Id ?? 0,
-                    ManufacturerName = vehicleModel.Manufacturer?.Name
+                    ManufacturerId = vehicleModel.ManufacturerId,
+                    /*ManufacturerName = vehicleModel.Manufacturer?.Name*/
 
                 });
             }

@@ -180,7 +180,7 @@ namespace ExpressVoitures.Models.Services
 
         public async Task SetCarImageAsCover(int imageId, int carId)
         {
-            IEnumerable<CarImage> ImageList  = (await _carImageRepository.GetAllCarImage(carId)).ToList();
+            IEnumerable<CarImage> ImageList  = (await _carImageRepository.GetAllCarImageByIdCar(carId)).ToList();
 
             CarImage? carImageNewCover = ImageList.FirstOrDefault(i => i.Id == imageId);
             CarImage? carImageOldCover = ImageList.FirstOrDefault(c => c.IsCover == true);

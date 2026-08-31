@@ -72,7 +72,14 @@
     else
     {
         <div class="ev-manufacturerFromAddCar-header">
-            <a href="/CarAdmin/AddCarAdminIndex"><i class="bi-arrow-left"></i> Retour au formulaire du véhicule</a>
+            @if (ViewBag.CarId != null)
+            {
+                <a href="/CarAdmin/EditCarAdminIndex/@ViewBag.CarId"><i class="bi-arrow-left"></i> Retour au formulaire du véhicule</a>
+            }
+            else
+            {
+                <a href="/CarAdmin/AddCarAdminIndex"><i class="bi-arrow-left"></i> Retour au formulaire du véhicule</a>
+            }
         </div>
     }
     <div>

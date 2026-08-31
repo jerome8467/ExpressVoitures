@@ -324,5 +324,12 @@ let selectedManufacturerName = '';
 let selectedVehicleModelName = '';
 
 function selectFinition(id, name) {
-    window.location = `/CarAdmin/AddCarAdminIndex?manufacturerId=${selectedManufacturerId}&manufacturerName=${encodeURIComponent(selectedManufacturerName)}&vehicleModelId=${selectedVehicleModelId}&vehicleModelName=${encodeURIComponent(selectedVehicleModelName)}&finitionId=${id}&finitionName=${encodeURIComponent(name)}`;
+    const params = new URLSearchParams(window.location.search);
+    const carId = params.get('carId');
+
+    if (carId) {
+        window.location = `/CarAdmin/EditCarAdminIndex/${carId}?manufacturerId=${selectedManufacturerId}&manufacturerName=${encodeURIComponent(selectedManufacturerName)}&vehicleModelId=${selectedVehicleModelId}&vehicleModelName=${encodeURIComponent(selectedVehicleModelName)}&finitionId=${id}&finitionName=${encodeURIComponent(name)}`;
+    } else {
+        window.location = `/CarAdmin/AddCarAdminIndex?manufacturerId=${selectedManufacturerId}&manufacturerName=${encodeURIComponent(selectedManufacturerName)}&vehicleModelId=${selectedVehicleModelId}&vehicleModelName=${encodeURIComponent(selectedVehicleModelName)}&finitionId=${id}&finitionName=${encodeURIComponent(name)}`;
+    }
 }

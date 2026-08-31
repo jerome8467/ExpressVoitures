@@ -16,7 +16,7 @@ namespace ExpressVoitures.Models.Repositories
         public async Task<IEnumerable<Finition>> GetAllFinitionByVehicleModel(int vehicleModelId)
         {
             IEnumerable<Finition> finitionList = await _dataBase.Finition.Where(v => v.VehicleModelId == vehicleModelId)
-                .Include(v => v.VehicleModel)
+                /*.Include(v => v.VehicleModel)*/
                 .ToListAsync();
             return finitionList;
         }
@@ -29,7 +29,7 @@ namespace ExpressVoitures.Models.Repositories
         public async Task<Finition?> GetByIdFinition(int id)
         {
             Finition? finitionById = await _dataBase.Finition
-                .Include(v => v.VehicleModel)
+                /*.Include(v => v.VehicleModel)*/
                 .FirstOrDefaultAsync(f => f.Id == id);
             return finitionById;
         }

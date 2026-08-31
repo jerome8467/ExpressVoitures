@@ -261,6 +261,7 @@ namespace ExpressVoitures.Models.Services
                 PurchasePrice = double.Parse(carAdminViewModel.PurchasePrice),
                 AvailabilityDate = carAdminViewModel.AvailabilityDate,
                 SaleDate = carAdminViewModel.SaleDate,
+                AdditionalAmount = carAdminViewModel.AdditionalAmount,
             };
             if (!newRecord)
                 newCarTransaction.Id = carAdminViewModel.CarTransactionId;

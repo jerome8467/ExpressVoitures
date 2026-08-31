@@ -7,6 +7,6 @@
         public bool IsCover { get; set; }
 
         public int CarId { get; set; }
-        public virtual Car? Car { get; set; }
+        /*public Car? Car { get; set; }*/
     }
 }

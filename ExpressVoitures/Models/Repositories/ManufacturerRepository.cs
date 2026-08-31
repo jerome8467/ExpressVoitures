@@ -25,6 +25,7 @@ namespace ExpressVoitures.Models.Repositories
                 await _dataBase.Manufacturer
                 .Include(m => m.VehicleModel)
                     .ThenInclude(v => v.Finition)
+                .AsSplitQuery()
                 .ToListAsync();
             return manufacturerList;
         }

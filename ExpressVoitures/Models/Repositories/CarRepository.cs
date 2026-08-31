@@ -17,6 +17,7 @@ namespace ExpressVoitures.Models.Repositories
         public async Task<IEnumerable<Car>> GetAllCar()
         {
             IEnumerable<Car> carList = await _dataBase.Car
+                .AsNoTracking()
                 .Include(m => m.Manufacturer)
                 .Include(v => v.VehicleModel)
                 .Include(f => f.Finition)
@@ -26,10 +27,32 @@ namespace ExpressVoitures.Models.Repositories
                 .ToListAsync();
             return carList;
         }
+        /*public async Task<IEnumerable<Car>> GetAllCar()
+        {
+            IEnumerable<Car> carList = await _dataBase.Car
+                .AsNoTracking()
+                .Select(c => new Car
+                {
+                    Id = c.Id,
+                    Year = c.Year,
+                    Kilometer = c.Kilometer,
+                    Description = c.Description,
+                    Status = c.Status,
+                    Manufacturer = new Manufacturer { Id = c.Manufacturer.Id, Name = c.Manufacturer.Name },
+                    VehicleModel = new VehicleModel { Id = c.VehicleModel.Id, Name = c.VehicleModel.Name, ManufacturerId = c.VehicleModel.ManufacturerId },
+                    Finition = new Finition { Id = c.Finition.Id, Name = c.Finition.Name, VehicleModelId = c.Finition.VehicleModelId },
+                    CarRepair = c.CarRepair,
+                    CarTransaction = c.CarTransaction,
+                    CarImage = c.CarImage.Where(img => img.IsCover).Take(1).ToList()
+                })
+                .ToListAsync();
+            return carList;
+        }*/
 
         public async Task<Car?> GetByIdCar(int id)
         {
             Car? carById = await _dataBase.Car
+                .AsNoTracking()
                 .Include(m => m.Manufacturer)
                 .Include(v => v.VehicleModel)
                 .Include(f => f.Finition)
@@ -64,12 +87,6 @@ namespace ExpressVoitures.Models.Repositories
 
             await _dataBase.SaveChangesAsync();
 
-            //Cas d'exemple pour des colonnes potentiellement absente du ViewModel à ne pas modifier
-            /*
-            _dataBase.Entry(car).Property(c => c.Colonne7).IsModified = false;
-            _dataBase.Entry(carRepair).Property(c => c.Colonne4).IsModified = false;
-            _dataBase.Entry(carTransaction).Property(c => c.Colonne5).IsModified = false;
-            */
         }
 
         public async Task DeleteCar(int id)

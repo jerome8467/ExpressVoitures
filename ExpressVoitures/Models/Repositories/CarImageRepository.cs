@@ -13,10 +13,10 @@ namespace ExpressVoitures.Models.Repositories
             _dataBase = dataBase;
         }
 
-        public async Task<IEnumerable<CarImage>> GetAllCarImage(int carId)
+        public async Task<IEnumerable<CarImage>> GetAllCarImageByIdCar(int carId)
         {
             IEnumerable<CarImage> carImageList = await _dataBase.CarImage
-                .Include(c => c.Car)
+                /*.Include(c => c.Car)*/
                 .Where(i => i.CarId == carId)
                 .ToListAsync();
             return carImageList;
@@ -25,7 +25,7 @@ namespace ExpressVoitures.Models.Repositories
         public async Task<CarImage?> GetByIdCarImage(int id)
         {
             CarImage? carImageById = await _dataBase.CarImage
-                .Include(c => c.Car)
+                /*.Include(c => c.Car)*/
                 .FirstOrDefaultAsync(f => f.Id == id);
             return carImageById;
         }
@@ -40,7 +40,7 @@ namespace ExpressVoitures.Models.Repositories
         {
             CarImage? carImageCurrent = await _dataBase.CarImage.FirstOrDefaultAsync(f => f.Id == carImageUpdate.Id);
             if (carImageCurrent == null) return;
-            _dataBase.CarImage.Update(carImageUpdate);
+            carImageCurrent.IsCover = carImageUpdate.IsCover;
             await _dataBase.SaveChangesAsync();
         }
 

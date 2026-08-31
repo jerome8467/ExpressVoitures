@@ -16,7 +16,7 @@ namespace ExpressVoitures.Models.Repositories
         public async Task<IEnumerable<CarRepair>> GetAllCarRepair()
         {
             IEnumerable<CarRepair> carRepairList = await _dataBase.CarRepair
-                .Include(c => c.Car)
+                /*.Include(c => c.Car)*/
                 .ToListAsync();
             return carRepairList;
         }
@@ -25,6 +25,13 @@ namespace ExpressVoitures.Models.Repositories
         {
             _dataBase.CarRepair.Add(carRepairNew);
             await _dataBase.SaveChangesAsync();
+        }
+
+        public async Task<CarRepair?> GetCarRepairByID(int id)
+        {
+            CarRepair? carRepair = await _dataBase.CarRepair.FirstOrDefaultAsync(i => i.Id == id);
+
+            return carRepair;
         }
 
 

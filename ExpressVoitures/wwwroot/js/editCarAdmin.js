@@ -78,6 +78,22 @@ document.addEventListener('DOMContentLoaded', () => {
     statusBtns[status].classList.add('selected');
     document.getElementById('hiddenStatus').value = status;
 
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('manufacturerId')) {
+        document.getElementById('hiddenManufacturerId').value = params.get('manufacturerId');
+        document.getElementById('hiddenManufacturerName').value = params.get('manufacturerName');
+        document.getElementById('selectedManufacturerName').textContent = params.get('manufacturerName');
+        document.getElementById('selectedManufacturerName').classList.remove('empty');
+        document.getElementById('hiddenVehicleModelId').value = params.get('vehicleModelId');
+        document.getElementById('hiddenVehicleModelName').value = params.get('vehicleModelName');
+        document.getElementById('selectedVehicleModelName').textContent = params.get('vehicleModelName');
+        document.getElementById('selectedVehicleModelName').classList.remove('empty');
+        document.getElementById('hiddenFinitionId').value = params.get('finitionId');
+        document.getElementById('hiddenFinitionName').value = params.get('finitionName');
+        document.getElementById('selectedFinitionName').textContent = params.get('finitionName');
+        document.getElementById('selectedFinitionName').classList.remove('empty');
+    }
+
     const form = document.getElementById('editCarForm');
     if (form) {
         form.addEventListener('submit', function () {
@@ -95,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         url: "/CarAdmin/AddImage",
         acceptedFiles: "image/*",
         addRemoveLinks: false,
-        autoProcessQueue: true,
+        autoProcessQueue: false,
         thumbnailWidth: 120,
         thumbnailHeight: 120,
         previewsContainer: false,
@@ -181,12 +197,23 @@ function setCoverExisting(btn, imageId) {
 }
 
 function deleteExistingImage(imageId, btn) {
-    fetch(`/CarAdmin/DeleteImage?imageId=${imageId}`, {
+    const carId = document.querySelector('[name="CarId"]').value;
+    fetch(`/CarAdmin/DeleteImage?imageId=${imageId}&carId=${carId}`, {
         method: 'POST',
         headers: { 'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value }
     }).then(response => {
         if (response.ok) {
-            btn.closest('.ev-imagePreview').remove();
+            const preview = btn.closest('.ev-imagePreview');
+            const wasCover = preview.classList.contains('cover');
+            preview.remove();
+
+            if (wasCover) {
+                const firstPreview = document.querySelector('.ev-imagePreview');
+                if (firstPreview) {
+                    firstPreview.classList.add('cover');
+                    firstPreview.querySelector('.btn-cover i').className = 'bi-star-fill';
+                }
+            }
         }
     });
 }

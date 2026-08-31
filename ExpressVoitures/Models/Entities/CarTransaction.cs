@@ -9,6 +9,6 @@
         public DateOnly? SaleDate { get; set; }
         public double AdditionalAmount { get; set; } = 500;
         public int CarId { get; set; }
-        public virtual Car? Car { get; set; }
+        /*public Car? Car { get; set; }*/
     }
 }

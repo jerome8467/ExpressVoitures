@@ -9,12 +9,11 @@ namespace ExpressVoitures.Models.Services
     public class FinitionService : IFinitionService
     {
         private readonly IFinitionRepository _finitionRepository;
-        private readonly IVehicleModelRepository _vehicleModelRepository;
 
-        public FinitionService(IFinitionRepository finitionRepository, IVehicleModelRepository vehicleModelRepository)
+        public FinitionService(IFinitionRepository finitionRepository)
         {
             _finitionRepository = finitionRepository;
-            _vehicleModelRepository = vehicleModelRepository;
+
         }
 
         private List<FinitionViewModel> MapToViewModel(IEnumerable<Finition> finitionDb)
@@ -26,8 +25,8 @@ namespace ExpressVoitures.Models.Services
                 {
                     Id = finition.Id,
                     Name = finition.Name,
-                    VehicleModelId = finition.VehicleModel?.Id ?? 0,
-                    VehicleModelName = finition.VehicleModel?.Name,
+                    VehicleModelId = finition.VehicleModelId,
+                    /*VehicleModelName = finition.VehicleModel?.Name,*/
                 });
             }
 
