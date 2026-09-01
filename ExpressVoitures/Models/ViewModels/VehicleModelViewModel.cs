@@ -17,6 +17,6 @@ namespace ExpressVoitures.Models.ViewModels
         ErrorMessageResourceName = "MissingManufacturer")]
         [Range(1, int.MaxValue, ErrorMessageResourceType = typeof(CarAdminViewModelResources),
         ErrorMessageResourceName = "MissingManufacturer")]
-        public int ManufacturerId { get; set; }
+        public required int ManufacturerId { get; set; }
     }
 }

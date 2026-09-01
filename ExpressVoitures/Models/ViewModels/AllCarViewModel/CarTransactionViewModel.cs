@@ -21,6 +21,6 @@ namespace ExpressVoitures.Models.ViewModels.AllCarViewModel
 
         public double AdditionalAmount { get; set; }
 
-        public int CarId { get; set; }
+        public required int CarId { get; set; }
     }
 }

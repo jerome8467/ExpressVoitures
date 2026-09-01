@@ -17,7 +17,7 @@ namespace ExpressVoitures.Models.ViewModels.AllCarViewModel
             ErrorMessageResourceName = "MissingTypeOfRepair")]
         public required string TypeOfRepair { get; set; }
 
-        public int CarId { get; set; }
+        public required int CarId { get; set; }
 
     }
 }

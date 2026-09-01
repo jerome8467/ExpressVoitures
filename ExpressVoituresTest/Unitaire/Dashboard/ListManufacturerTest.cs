@@ -26,8 +26,8 @@ namespace ExpressVoituresTest.Unitaire.Dashboard
                     Name = "Toyota",
                     VehicleModel = new List<VehicleModel>
                     {
-                        new VehicleModel { Id = 1, Name = "CHR", Finition = new List<Finition> { new Finition { Id = 1, Name = "Graphite" }, new Finition { Id = 2, Name = "Dynamic" }, new Finition { Id = 3, Name = "Collection" } } },
-                        new VehicleModel { Id = 2, Name = "Yaris", Finition = new List<Finition> { new Finition { Id = 4, Name = "Base" }, new Finition { Id = 5, Name = "GR" } } }
+                        new VehicleModel { Id = 1, Name = "CHR", ManufacturerId = 1, Finition = new List<Finition> { new Finition { Id = 1, Name = "Graphite" , VehicleModelId = 1 }, new Finition { Id = 2, Name = "Dynamic", VehicleModelId = 1 }, new Finition { Id = 3, Name = "Collection", VehicleModelId = 1 } } },
+                        new VehicleModel { Id = 2, Name = "Yaris", ManufacturerId = 1, Finition = new List<Finition> { new Finition { Id = 4, Name = "Base", VehicleModelId = 2 }, new Finition { Id = 5, Name = "GR", VehicleModelId = 2 } } }
                     }
                 },
                 new Manufacturer
@@ -36,7 +36,7 @@ namespace ExpressVoituresTest.Unitaire.Dashboard
                     Name = "Renault",
                     VehicleModel = new List<VehicleModel>
                     {
-                        new VehicleModel { Id = 3, Name = "Clio", Finition = new List<Finition> { new Finition { Id = 6, Name = "Zen" } } }
+                        new VehicleModel { Id = 3, Name = "Clio", ManufacturerId = 2, Finition = new List<Finition> { new Finition { Id = 6, Name = "Zen", VehicleModelId = 3 } } }
                     }
                 }
             };

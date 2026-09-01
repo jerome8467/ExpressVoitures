@@ -3,10 +3,10 @@
     public class CarImage
     {
         public int Id { get; set; }
-        public string? ImagePath { get; set; }
+        public required string ImagePath { get; set; }
         public bool IsCover { get; set; }
 
-        public int CarId { get; set; }
-        /*public Car? Car { get; set; }*/
+        public required int CarId { get; set; }
+
     }
 }

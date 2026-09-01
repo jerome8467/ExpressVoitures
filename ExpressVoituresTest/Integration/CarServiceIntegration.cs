@@ -53,8 +53,8 @@ namespace ExpressVoituresTest.IntegrationTests
         {
             // Arrange
             List<CarImageViewModel> NewListImage = new List<CarImageViewModel> {
-                new CarImageViewModel { ImagePath = "/images/cars/new1.jpg", IsCover = true },
-                new CarImageViewModel { ImagePath = "/images/cars/new2.jpg", IsCover = false } };
+                new CarImageViewModel {CarId = 0, ImagePath = "/images/cars/new1.jpg", IsCover = true },
+                new CarImageViewModel {CarId = 0, ImagePath = "/images/cars/new2.jpg", IsCover = false } };
             CarAdminViewModel carAdminViewModel = new CarAdminViewModel
             {
                 ManufacturerId = 1,
@@ -180,8 +180,8 @@ namespace ExpressVoituresTest.IntegrationTests
         {
             // Arrange
             List<CarImageViewModel> ListImageToAdd = new List<CarImageViewModel> {
-                new CarImageViewModel { ImagePath = "/images/cars/new1.jpg", IsCover = true },
-                new CarImageViewModel { ImagePath = "/images/cars/new2.jpg", IsCover = false } };
+                new CarImageViewModel {CarId = 0, ImagePath = "/images/cars/new1.jpg", IsCover = true },
+                new CarImageViewModel {CarId = 0, ImagePath = "/images/cars/new2.jpg", IsCover = false } };
             CarAdminViewModel carAdminViewModel = new CarAdminViewModel
             {
                 ManufacturerId = 1,
@@ -275,8 +275,8 @@ namespace ExpressVoituresTest.IntegrationTests
         {
             // Arrange
             List<CarImageViewModel> ListImageToAdd = new List<CarImageViewModel> {
-                new CarImageViewModel { ImagePath = "/images/cars/new1.jpg", IsCover = true },
-                new CarImageViewModel { ImagePath = "/images/cars/new2.jpg", IsCover = false } };
+                new CarImageViewModel {CarId = 0, ImagePath = "/images/cars/new1.jpg", IsCover = true },
+                new CarImageViewModel {CarId = 0, ImagePath = "/images/cars/new2.jpg", IsCover = false } };
             CarAdminViewModel carAdminViewModel = new CarAdminViewModel
             {
                 ManufacturerId = 1,
@@ -293,7 +293,7 @@ namespace ExpressVoituresTest.IntegrationTests
             await _carService.AddCar(carAdminViewModel);
 
             // Act
-            CarImageViewModel carImageNew = new CarImageViewModel { ImagePath = "/images/cars/new3.jpg", IsCover = false };
+            CarImageViewModel carImageNew = new CarImageViewModel { CarId = carAdminViewModel.CarId, ImagePath = "/images/cars/new3.jpg", IsCover = false };
             await _carService.AddCarImage(carImageNew, carAdminViewModel);
             int imgCount = carAdminViewModel.ImagesList.Count();
             int imgFalse = carAdminViewModel.ImagesList.Where(i => i.IsCover == false).Count();
@@ -311,9 +311,9 @@ namespace ExpressVoituresTest.IntegrationTests
         {
             // Arrange
             List<CarImageViewModel> ListImageToAdd = new List<CarImageViewModel> {
-                new CarImageViewModel { ImagePath = "/images/cars/new1.jpg", IsCover = true },
-                new CarImageViewModel { ImagePath = "/images/cars/new2.jpg", IsCover = false },
-                new CarImageViewModel { ImagePath = "/images/cars/new3.jpg", IsCover = false }};
+                new CarImageViewModel {CarId=0, ImagePath = "/images/cars/new1.jpg", IsCover = true },
+                new CarImageViewModel {CarId=0, ImagePath = "/images/cars/new2.jpg", IsCover = false },
+                new CarImageViewModel {CarId=0, ImagePath = "/images/cars/new3.jpg", IsCover = false }};
 
             CarAdminViewModel carAdminViewModel = new CarAdminViewModel
             {
@@ -356,9 +356,9 @@ namespace ExpressVoituresTest.IntegrationTests
         {
             // Arrange
             List<CarImageViewModel> ListImageToAdd = new List<CarImageViewModel> {
-                new CarImageViewModel { ImagePath = "/images/cars/new1.jpg", IsCover = false },
-                new CarImageViewModel { ImagePath = "/images/cars/new2.jpg", IsCover = false },
-                new CarImageViewModel { ImagePath = "/images/cars/new3.jpg", IsCover = true }};
+                new CarImageViewModel {CarId=0, ImagePath = "/images/cars/new1.jpg", IsCover = false },
+                new CarImageViewModel {CarId=0, ImagePath = "/images/cars/new2.jpg", IsCover = false },
+                new CarImageViewModel {CarId=0, ImagePath = "/images/cars/new3.jpg", IsCover = true }};
 
             CarAdminViewModel carAdminViewModel = new CarAdminViewModel
             {
@@ -403,9 +403,9 @@ namespace ExpressVoituresTest.IntegrationTests
         {
             // Arrange
             List<CarImageViewModel> ListImageToAdd = new List<CarImageViewModel> {
-                new CarImageViewModel { ImagePath = "/images/cars/new1.jpg", IsCover = false },
-                new CarImageViewModel { ImagePath = "/images/cars/new2.jpg", IsCover = false },
-                new CarImageViewModel { ImagePath = "/images/cars/new3.jpg", IsCover = true }};
+                new CarImageViewModel {CarId=0, ImagePath = "/images/cars/new1.jpg", IsCover = false },
+                new CarImageViewModel {CarId=0, ImagePath = "/images/cars/new2.jpg", IsCover = false },
+                new CarImageViewModel {CarId=0, ImagePath = "/images/cars/new3.jpg", IsCover = true }};
 
             CarAdminViewModel carAdminViewModel = new CarAdminViewModel
             {

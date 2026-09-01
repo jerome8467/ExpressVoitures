@@ -35,6 +35,7 @@ namespace ExpressVoitures.Controllers
                 await image.CopyToAsync(stream);
                 return new CarImageViewModel
                 {
+                    CarId = 0,
                     ImagePath = "/images/cars/" + fileName,
                     IsCover = i == 0
                 };
@@ -121,6 +122,7 @@ namespace ExpressVoitures.Controllers
 
             var imageViewModel = new CarImageViewModel
             {
+                CarId = carId,
                 ImagePath = "/images/cars/" + fileName,
                 IsCover = car.ImagesList?.Count == 0
             };

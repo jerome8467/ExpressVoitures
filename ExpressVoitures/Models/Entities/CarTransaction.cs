@@ -8,7 +8,7 @@
         public DateOnly? AvailabilityDate { get; set; }
         public DateOnly? SaleDate { get; set; }
         public double AdditionalAmount { get; set; } = 500;
-        public int CarId { get; set; }
-        /*public Car? Car { get; set; }*/
+        public required int CarId { get; set; }
+
     }
 }

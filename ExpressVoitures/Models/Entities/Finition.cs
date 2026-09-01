@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public required string Name { get; set; }
 
-        public int VehicleModelId { get; set; }
-        /*public VehicleModel? VehicleModel { get; set; }*/
+        public required int VehicleModelId { get; set; }
+
     }
 }
