@@ -103,9 +103,7 @@
     &::-webkit-scrollbar {
         display: none;
     }
-    /* 2. Pour Firefox */
     scrollbar-width: none;
-    /* 3. Pour Internet Explorer / Edge historique */
     -ms-overflow-style: none;
 }
 

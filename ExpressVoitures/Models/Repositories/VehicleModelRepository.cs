@@ -16,7 +16,6 @@ namespace ExpressVoitures.Models.Repositories
         public async Task<IEnumerable<VehicleModel>> GetAllVehicleModelByManufacturer(int manufacturerId)
         {
             IEnumerable<VehicleModel> vehicleModelList = await _dataBase.VehicleModel.Where(i => i.ManufacturerId == manufacturerId)
-                /*.Include(m => m.Manufacturer)*/
                 .ToListAsync();
             return vehicleModelList;
         }
@@ -29,7 +28,6 @@ namespace ExpressVoitures.Models.Repositories
         public async Task<VehicleModel?> GetByIdVehicleModel(int id)
         {
             VehicleModel? vehicleModelById = await _dataBase.VehicleModel
-                /*.Include(m => m.Manufacturer)*/
                 .FirstOrDefaultAsync(v => v.Id == id);
             return vehicleModelById;
         }

@@ -91,8 +91,6 @@ namespace ExpressVoitures.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteImage(int imageId, int carId)
         {
-            /*await _carService.DeleteCarImage(new CarImageViewModel { ImageId = imageId }, new CarAdminViewModel());
-            return Ok();*/
             var car = await _carService.GetByIdCarAdminViewModel(carId);
             if (car == null) return NotFound();
             var image = car.ImagesList?.FirstOrDefault(i => i.ImageId == imageId);

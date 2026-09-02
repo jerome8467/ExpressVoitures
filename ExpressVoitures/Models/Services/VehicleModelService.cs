@@ -25,7 +25,6 @@ namespace ExpressVoitures.Models.Services
                     Id = vehicleModel.Id,
                     Name = vehicleModel.Name,
                     ManufacturerId = vehicleModel.ManufacturerId,
-                    /*ManufacturerName = vehicleModel.Manufacturer?.Name*/
 
                 });
             }

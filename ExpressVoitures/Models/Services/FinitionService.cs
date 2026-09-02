@@ -26,7 +26,7 @@ namespace ExpressVoitures.Models.Services
                     Id = finition.Id,
                     Name = finition.Name,
                     VehicleModelId = finition.VehicleModelId,
-                    /*VehicleModelName = finition.VehicleModel?.Name,*/
+
                 });
             }
 

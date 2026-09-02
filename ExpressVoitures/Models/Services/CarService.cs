@@ -160,24 +160,6 @@ namespace ExpressVoitures.Models.Services
             }
         }
 
-        /*public async Task SetCarImageAsCover(CarImageViewModel carImageViewModel, CarAdminViewModel carAdminViewModel)
-        {
-            carImageViewModel.IsCover = true;
-
-            CarImageViewModel? carImageOldTrue = carAdminViewModel.ImagesList?.FirstOrDefault(c => c.IsCover == true);
-            if (carImageOldTrue != null)
-            {
-                carImageOldTrue.IsCover = false;
-
-                CarImage carImageFromDatabaseFalse = CarMapper.MapToCarImageFromDatabase(carImageOldTrue, false);
-                await _carImageRepository.UpdateCarImage(carImageFromDatabaseFalse);
-            }
-
-            CarImage carImageFromDatabaseTrue = CarMapper.MapToCarImageFromDatabase(carImageViewModel, false);
-            await _carImageRepository.UpdateCarImage(carImageFromDatabaseTrue);
-
-        }*/
-
         public async Task SetCarImageAsCover(int imageId, int carId)
         {
             IEnumerable<CarImage> ImageList  = (await _carImageRepository.GetAllCarImageByIdCar(carId)).ToList();

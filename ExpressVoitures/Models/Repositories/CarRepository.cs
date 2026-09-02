@@ -23,31 +23,10 @@ namespace ExpressVoitures.Models.Repositories
                 .Include(f => f.Finition)
                 .Include(r => r.CarRepair)
                 .Include(t => t.CarTransaction)
-                .Include(i => i.CarImage!.Where(img => img.IsCover).Take(1))
+                .Include(i => i.CarImage!.Where(img => img.IsCover).Take(1)).AsSplitQuery()
                 .ToListAsync();
             return carList;
         }
-        /*public async Task<IEnumerable<Car>> GetAllCar()
-        {
-            IEnumerable<Car> carList = await _dataBase.Car
-                .AsNoTracking()
-                .Select(c => new Car
-                {
-                    Id = c.Id,
-                    Year = c.Year,
-                    Kilometer = c.Kilometer,
-                    Description = c.Description,
-                    Status = c.Status,
-                    Manufacturer = new Manufacturer { Id = c.Manufacturer.Id, Name = c.Manufacturer.Name },
-                    VehicleModel = new VehicleModel { Id = c.VehicleModel.Id, Name = c.VehicleModel.Name, ManufacturerId = c.VehicleModel.ManufacturerId },
-                    Finition = new Finition { Id = c.Finition.Id, Name = c.Finition.Name, VehicleModelId = c.Finition.VehicleModelId },
-                    CarRepair = c.CarRepair,
-                    CarTransaction = c.CarTransaction,
-                    CarImage = c.CarImage.Where(img => img.IsCover).Take(1).ToList()
-                })
-                .ToListAsync();
-            return carList;
-        }*/
 
         public async Task<Car?> GetByIdCar(int id)
         {

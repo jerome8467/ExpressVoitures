@@ -17,7 +17,6 @@ namespace ExpressVoitures.Models.Repositories
         public async Task<IEnumerable<CarTransaction>> GetAllCarTransaction()
         {
             IEnumerable<CarTransaction> carTransactionList = await _dataBase.CarTransaction
-                /*.Include(c => c.Car)*/
                 .ToListAsync();
             return carTransactionList;
         }
