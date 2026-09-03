@@ -54,10 +54,18 @@ namespace ExpressVoitures.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CarRepair>()
+                .HasIndex(r => r.CarId)
+                .IsUnique();
+
+            modelBuilder.Entity<CarRepair>()
                 .HasOne<Car>()
                 .WithOne(c => c.CarRepair)
                 .HasForeignKey<CarRepair>(r => r.CarId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CarTransaction>()
+                .HasIndex(r => r.CarId)
+                .IsUnique();
 
             modelBuilder.Entity<CarTransaction>()
                 .HasOne<Car>()
