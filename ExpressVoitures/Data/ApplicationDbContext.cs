@@ -64,7 +64,7 @@ namespace ExpressVoitures.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CarTransaction>()
-                .HasIndex(r => r.CarId)
+                .HasIndex(t => t.CarId)
                 .IsUnique();
 
             modelBuilder.Entity<CarTransaction>()
